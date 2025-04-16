@@ -1,0 +1,153 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+/* Fullscreen Background Image */
+body {
+    background: url('gymimage1.jpg') no-repeat center center/cover;
+    position: relative;
+    background-attachment: fixed;
+}
+
+/* Add Translucent Overlay to Image */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: -2;
+}
+
+/* Fullscreen Video (with transparency) */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.6; /* Make the video semi-transparent */
+    z-index: -1;
+}
+/* Centered SearchGym Box */
+.SearchGym {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.65); /* Dark translucent box */
+    padding: 30px;
+    width: 350px; /* Box width */
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+
+}
+
+/* Form Heading */
+.SearchGym h4 {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+/* Style for Labels */
+.SearchGym label {
+    padding-left: 10px;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #ffffff;
+    text-align: left;
+}
+
+/* Input Fields */
+.SearchGym input {
+    height: 21px;
+    width: 100%;
+    padding: 7px;
+    padding-top: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    font-size: 14px;
+    width: 90%;
+    align-items: left;
+    line-height: 10px;
+}
+
+/* Placeholder Text */
+.SearchGym input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Input Focus Effect */
+.SearchGym input:focus {
+    border-color: #bfb2af;
+    outline: none;
+}
+.title{
+    padding-top: 50px;
+    right: 50%;
+    left: 45%;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    color: rgb(255, 255, 255,0.8);
+}
+/* Log In Button */
+.SearchGym button {
+    margin-bottom: 10%;
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    border: none;
+    border-radius: 30px; /* Rounded button */
+    color: rgb(221, 208, 208);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover Effect for Button */
+.SearchGym button:hover {
+    background: #1c1c1c;
+    transform: scale(1.05);
+}
+.SearchGym p{
+    margin-top: 2px;
+    color: rgb(255, 255, 255,0.6);
+}
+/* Workout Result Card */
+.workout-card {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+    padding: 25px;
+    margin: 80px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    line-height: 1.6;
+}
+
+.workout-card h3 {
+    margin-top: 0;
+    font-size: 26px;
+    color: #ffcc00;
+}
+
+.workout-card p {
+    margin-bottom: 12px;
+}

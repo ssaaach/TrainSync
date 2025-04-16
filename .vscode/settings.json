@@ -1,0 +1,19 @@
+{
+    "msg.editor.showHidden": false,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 100,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "TrainSyncDB",
+            "username": "root",
+            "database": "TrainSync",
+            "askForPassword": true
+        }
+    ]
+}

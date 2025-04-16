@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find A Gym</title>
+    <link rel="icon" type="image/png" href="webicon1.png">
+    <link rel="stylesheet" href="gyms.css">
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="backgroundhome.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="title" id="trainsynctitle"><h1>TrainSync</h1></div>
+    <form id="GymsearchForm">
+        <div class="SearchGym" id="searchBox">
+            <h4>Find a Gym</h4>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required><br><br>
+            <button type="Search">Search</button>
+            <p id="errorMessage" style="color: red;"></p>
+            <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
+        </div>
+        <div id="gymResults" class="gym-results"></div>
+    </form>
+    
+</body>
+</html>
+<script>
+    document.getElementById("GymsearchForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const city = document.getElementById("city").value.trim();
+    
+        if (!city) return;
+    
+        try {
+            const response = await fetch(`http://localhost:5000/auth/gyms/${city}`);
+            const gyms = await response.json();
+    
+            const resultsDiv = document.getElementById("gymResults");
+            resultsDiv.innerHTML = ""; // clear previous
+    
+            if (gyms.length === 0) {
+                resultsDiv.innerHTML = "<p>No gyms found in this city.</p>";
+                return;
+            }
+            // Hide the search box
+            document.getElementById("searchBox").style.display = "none";
+            document.getElementById("trainsynctitle").style.display = "none";
+            gyms.forEach(gym => {
+                const card = document.createElement("div");
+                card.className = "gym-card";
+                card.innerHTML = `
+                    <h3>${gym.name}</h3>
+                    <p><strong>Address:</strong> <a href="${gym.address}" target="_blank">View Location</a></p>
+                    <p><strong>Email:</strong> ${gym.email}</p>
+                    <p><strong>Website:</strong> <a href="${gym.website}" target="_blank">View Website</a></p>
+                `;
+                resultsDiv.appendChild(card);
+
+            });
+        } catch (err) {
+            console.error("Error:", err);
+            document.getElementById("errorMessage").textContent = "Server error. Try again.";
+        }
+    });
+</script>
+    

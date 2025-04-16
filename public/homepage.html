@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainSync</title>
+  <link rel="icon" type="image/png" href="webicon1.png">
+  <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+  <video autoplay muted loop id="bg-video">
+    <source src="backgroundhome.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="main-container">
+    <nav class="navbar">
+      <ul>
+        <li><a href="homepage.html"><img src="webicon1.png" height="60px" width="60px"><span></span></a></li>
+        <li><a href="trainermatch.html">Find a Trainer</a></li>
+        <li><a href="workoutplans.html">Workout Plans</a></li>
+        <li><a href="dietplans.html">Diet Plans</a></li>
+        <li><a href="gyms.html">Find a Gym</a></li>
+        <li id="nav-login"><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- Sidebar (initially hidden) -->
+    <div id="sidebar" class="sidebar" style="display: none; position: absolute; top: 70px; right: 10px; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; z-index: 999;">
+      <a href="updateprofile.html" style="display: block; color: white; text-decoration: none; margin-bottom: 10px;">Update Profile</a>
+      <a href="#" id="logout-btn" style="display: block; color: white; text-decoration: none;">Logout</a>
+    </div>
+
+    <div class="image-container">
+      <video autoplay muted loop>
+        <source src="trainertrainee1.mp4" type="video/mp4">
+        Trainer and trainee
+      </video>
+      <div class="overlay-text">
+        <h3>Stay Fit,</h3>
+        <h3>Stay Strong</h3>
+      </div>
+    </div>
+
+    <div class="info-content">
+      <div class="info-text">
+        <br>
+        <p>Find the perfect trainer near you and start your fitness journey today.</p>
+        <p>Access personalized diet plans and workout routines tailored to your goals.</p>
+        <p>Train smarter, not harder—match with the right coach for your needs.</p>
+        <br><br>
+      </div>
+      <div class="get-started-button">
+        <button><a href="registration.html">Get Started</a></button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <img src="webicon1.png" height="40px" width="40px">
+      <div class="footerinfo">
+        <p>Our mission is to make fitness accessible and personalized for everyone.</p>
+        <p>We connect trainees with the right trainers, provide structured workout plans, and offer </p>
+        <p>tailored diet guidance—all in one place. Whether you're just starting or pushing your limits,</p>
+        <p>we’re here to help you achieve your goals, one step at a time.</p>
+      </div>
+    </div>
+
+    <div class="contactinfo">
+      <p><strong>Contact Information</strong></p><br>
+      <a href="https://www.instagram.com/sachin._1275/?hl=en" target="_blank"><img src="insta logo.png" height="50px" width="50px"></a>
+      <a href="mailto:sachin.mitblr2023@learner.manipal.edu" target="_blank"><img src="emaail.png" height="50px" width="50px"></a>
+      <a href="https://www.linkedin.com/in/sachin-bhat-98397b2a0/" target="_blank"><img src="linkedin logo.png" height="37px" width="37px"></a>
+    </div>        
+  </footer>
+</body>
+</html>
+
+<!-- Replace the entire script section at the bottom with this single version -->
+<script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector(".navbar");
+  
+    window.addEventListener("scroll", function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        navbar.classList.add("hidden-navbar");
+      } else {
+        navbar.classList.remove("hidden-navbar");
+      }
+      lastScrollTop = scrollTop;
+    });
+  
+    document.addEventListener("DOMContentLoaded", async () => {
+      const navLogin = document.getElementById("nav-login");
+      const sidebar = document.getElementById("sidebar");
+  
+      try {
+        const res = await fetch("http://localhost:5000/auth/session", {
+          credentials: "include"
+        });
+        const data = await res.json();
+  
+        if (data.loggedIn) {
+          navLogin.innerHTML = `<a href="#" id="user-menu-toggle">☰ ${data.email}</a>`;
+  
+          document.getElementById("user-menu-toggle").addEventListener("click", (e) => {
+            e.preventDefault();
+            sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+          });
+  
+          document.getElementById("logout-btn").addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              const response = await fetch("http://localhost:5000/auth/logout", {
+                method: "POST",
+                credentials: "include"
+              });
+              const result = await response.json();
+              if (response.ok) {
+                window.location.href = "homepage.html"; // Refresh to show logged out state
+              }
+            } catch (err) {
+              console.error("Logout failed:", err);
+            }
+          });
+        }
+      } catch (err) {
+        console.error("Session check failed:", err);
+      }
+  
+      // Close sidebar when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!sidebar.contains(e.target)) {
+          sidebar.style.display = "none";
+        }
+      });
+    });
+</script>

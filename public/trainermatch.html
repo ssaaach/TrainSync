@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trainer Matching Demo</title>
+  <link rel="stylesheet" href="trainermatch.css">
+  <link rel="icon" type="image/png" href="webicon1.png">
+</head>
+<body>
+  <video autoplay muted loop id="bg-video">
+    <source src="backgroundhome.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="title" id="trainsynctitle"><h1>TrainSync</h1></div>
+  <div class="carousel-container">
+    <div class="trainer-profile">
+      <h2 id="trainer-name">Trainer Name</h2>
+      <p id="trainer-specialty">Specialty</p>
+      <p id="trainer-experience">Experience</p>
+    </div>
+    <div class="buttons">
+      <button id="reject" onclick="nextTrainer()">Reject</button>
+      <button id="match" onclick="matchTrainer()">Match</button>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+        const trainers = [
+    { name: 'Trainer 1', specialty: 'Yoga', experience: '5 years' },
+    { name: 'Trainer 2', specialty: 'Weightlifting', experience: '3 years' },
+    { name: 'Trainer 3', specialty: 'Cardio', experience: '7 years' },
+    // Add more trainer profiles as needed
+    ];
+
+    let currentTrainerIndex = 0;
+
+    function displayTrainer(index) {
+    const trainer = trainers[index];
+    document.getElementById('trainer-name').textContent = trainer.name;
+    document.getElementById('trainer-specialty').textContent = `Specialty: ${trainer.specialty}`;
+    document.getElementById('trainer-experience').textContent = `Experience: ${trainer.experience}`;
+    }
+
+    function nextTrainer() {
+    currentTrainerIndex++;
+    if (currentTrainerIndex >= trainers.length) {
+        alert('No more trainers to show!');
+    } else {
+        displayTrainer(currentTrainerIndex);
+    }
+    }
+
+    function matchTrainer() {
+    const trainer = trainers[currentTrainerIndex];
+    alert(`You have matched with ${trainer.name}!`);
+    nextTrainer();
+    }
+
+    displayTrainer(currentTrainerIndex);
+
+</script>

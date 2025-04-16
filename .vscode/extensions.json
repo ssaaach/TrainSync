@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "formulahendry.vscode-mysql",
+        "oracle.mysql-shell-for-vs-code"
+    ]
+}
