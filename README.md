@@ -60,8 +60,9 @@ git clone https://github.com/ssaaaach/TrainSync.git
 cd TrainSync
 npm install
 node server.js
+```
 
-🖼️ Sample Pages
+## 🖼️ Sample Pages
 🏠 Homepage with animated background and session-aware login
 
 🧍 Diet & workout planners with input-based data rendering
@@ -72,7 +73,7 @@ node server.js
 
 🎨 Clean, minimal dark theme UI
 
-🔮 Roadmap
+## 🔮 Roadmap
 AI-powered trainer matching
 
 Distance-based trainer recommendations via Google Maps API
@@ -81,7 +82,7 @@ Chat system for trainee–trainer communication
 
 Full mobile responsiveness
 
-🙋‍♂️ About the Developer
+## 🙋‍♂️ About the Developer
 Sachin Bhat
 B.Tech CSE @ Manipal Institute of Technology
 📧 sachin.mitblr2023@learner.manipal.edu
