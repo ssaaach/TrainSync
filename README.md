@@ -84,9 +84,13 @@ Full mobile responsiveness
 
 ## 🙋‍♂️ About the Developer
 Sachin Bhat
+
 B.Tech CSE @ Manipal Institute of Technology
+
 📧 sachin.mitblr2023@learner.manipal.edu
-🔗 LinkedIn
-🐙 GitHub
+
+🔗 [LinkedIn](https://www.linkedin.com/in/sachin-bhat-98397b2a0/)
+
+🐙 [GitHub](https://github.com/ssaaach)
 
 💻 Built completely from scratch as a solo project — backend, frontend, DB, and integration 🔥
