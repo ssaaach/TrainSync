@@ -21,11 +21,11 @@ for (const role of ['trainee', 'trainer']) {
     await page.goto('/registration.html');
     await page.fill('#email', email);
     await page.fill('#name', `E2E ${role}`);
-    await page.fill('#role', ` ${role.toUpperCase()}`);
+    await page.click(`label[for=role-${role}]`);
     await page.fill('#password', PASSWORD);
     await page.fill('#confirmPassword', PASSWORD);
     await page.click('button[type=submit]');
-    await page.waitForURL('**/login.html');
+    await page.waitForURL('**/login.html?registered=1');
 
     await page.fill('#email', email);
     await page.fill('#password', PASSWORD);
@@ -67,7 +67,7 @@ for (const role of ['trainee', 'trainer']) {
     await page.goto('/homepage1.html');
     await page.click('#logout-btn');
     await page.waitForURL('**/homepage.html');
-    await expect(page.locator('#nav-login')).toHaveText('Login');
+    await expect(page.locator('.ts-nav').getByRole('link', { name: 'Log in' })).toBeVisible();
 
     // Logged out: the dashboard bounces to login.
     await page.goto('/homepage1.html');
@@ -83,11 +83,13 @@ test('homepage shows the user menu when logged in, and logout works', async ({ p
   await apiPost(page, '/api/auth/register', { email, name: 'Home', role: 'trainee', password: PASSWORD, confirmPassword: PASSWORD });
   await apiPost(page, '/api/auth/login', { email, password: PASSWORD });
   await page.goto('/homepage.html');
-  await expect(page.locator('#user-menu-toggle')).toHaveText(`☰ ${email}`);
-  await page.click('#user-menu-toggle');
-  await expect(page.locator('#sidebar')).toBeVisible();
-  await page.click('#logout-btn');
-  await expect(page.locator('#nav-login')).toHaveText('Login');
+  const menuButton = page.locator('[data-ts-usermenu]');
+  await expect(menuButton).toContainText('Home');
+  await menuButton.click();
+  await expect(page.locator('.ts-usermenu__panel')).toContainText(email);
+  await page.locator('.ts-usermenu__panel [data-ts-logout]').click();
+  await page.waitForURL('**/homepage.html');
+  await expect(page.locator('.ts-nav').getByRole('link', { name: 'Log in' })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
@@ -99,9 +101,9 @@ test('login shows the server error message for bad credentials', async ({ page }
   await expect(page.locator('#errorMessage')).toHaveText('Invalid email or password');
 });
 
-test('every existing page loads without console or CSP errors', async ({ page }) => {
+test('every page loads without console or CSP errors', async ({ page }) => {
   const errors = trackErrors(page);
-  for (const p of ['homepage', 'login', 'registration', 'trainermatch', 'workoutplans', 'dietplans', 'gyms']) {
+  for (const p of ['homepage', 'login', 'registration', 'privacy', 'trainermatch', 'workoutplans', 'dietplans', 'gyms']) {
     await page.goto(`/${p}.html`);
     await page.waitForLoadState('networkidle', { timeout: 10_000 }).catch(() => {});
   }

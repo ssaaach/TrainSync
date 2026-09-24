@@ -98,6 +98,7 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/diets', dietRoutes);
 app.use('/api/gyms', gymRoutes);
+app.use('/api/stats', require('./routes/stats'));
 app.use('/api/cron', require('./routes/cron'));
 app.use('/api', apiNotFound);
 

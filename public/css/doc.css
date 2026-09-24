@@ -1,0 +1,16 @@
+/* Long-form reading pages (privacy policy). Text always sits on glass. */
+.d-wrap { padding: calc(var(--nav-h) + var(--s-7)) 0 var(--s-8); }
+.d-card { padding: clamp(24px, 5vw, 56px); border-radius: var(--r-xl); max-width: 860px; margin-inline: auto; }
+.d-card > * + * { margin-top: var(--s-4); }
+.d-card h1 { font-size: var(--fs-3xl); }
+.d-card h2 { font-size: var(--fs-xl); margin-top: var(--s-7); color: var(--c-gold); scroll-margin-top: calc(var(--nav-h) + 24px); }
+.d-card p, .d-card li { color: var(--c-text-soft); }
+.d-card ul { padding-left: 1.2em; display: grid; gap: var(--s-2); }
+.d-card a { color: var(--c-gold); }
+.d-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.d-table th, .d-table td { text-align: left; vertical-align: top; padding: var(--s-3); border-bottom: 1px solid var(--c-line); }
+.d-table th { color: var(--c-text); font-weight: var(--fw-semibold); }
+.d-table td { color: var(--c-text-soft); }
+.d-scroll { overflow-x: auto; }
+.d-toc { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.d-toc a { text-decoration: none; }

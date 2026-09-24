@@ -2,6 +2,47 @@
 
 v3 is built in phases (see `docs/PLAN.md`). Each entry lists what changed, how to check it, and the gates that passed.
 
+## v3 Phase B: design system and landing page (2026-09-24)
+
+**Design system**
+- **Shared styles:** `public/css/tokens.css` holds every shared value (colour, radii, blur, shadows, 4 px spacing scale, fluid type scale, motion, z-layers). `public/css/components.css` builds the components on top: nav, gold/ghost/dark buttons, icon buttons, glass cards, removable chips, tags, compatibility pill, floating bottom pill, slide-up sheet, tabs, toasts, form fields, segmented control, switch, meters and footer.
+- **Shared chrome:** `public/js/layout.js` renders the role-aware nav (visitor, trainee or trainer), the footer with data attributions, the fixed smoke background, scroll reveal and toasts. `public/icons.svg` is one icon sprite.
+- **Self-hosted, no CDNs:** Poppins (OFL) woff2 files, plus Leaflet and Chart.js vendored into `public/vendor/` by `npm run assets`. Poppins now renders for the first time (it was declared but never loaded).
+- **Video:** `npm run assets -- --media` (ffmpeg-static) re-encodes the smoke video.
+  - 13.5 MB becomes 133 KB WebM / 405 KB MP4 (a wide crop for desktop, a tall one for phones), with posters and brightest-frame metadata.
+  - The coach clip goes from 6 MB to 1 MB, audio removed.
+  - The video loads only without reduced motion, Save-Data or a 2G/3G connection; otherwise visitors see the poster (frame 0).
+
+**Pages**
+- **`homepage.html` (landing):** rebuilt section by section on the reference layout, in the TrainSync identity:
+  - hero with dual CTA and a live stat chip
+  - "Transform how you train" split
+  - features grid: a wide AI Trainer Match card with the lazy coach video, plus 3 tall cards with vertical labels and corner badges
+  - how-it-works carousel with a Gym Finder card holding a mini OSM map (Leaflet loads lazily)
+  - 3 "what you get" sample tiles, a CTA band and the footer
+- **`login.html` and `registration.html`:** rebuilt on the components, with a trainee/trainer segmented control, show-password and field-level errors. `?next=` accepts same-site paths only.
+- **`privacy.html`:** the consent and privacy policy (DPDP principles, per-purpose table, who sees what, rights, deletion, safety, cookies).
+
+**API**
+- `GET /api/stats`: real counts only (synthetic data excluded), city spellings merged, cached 5 min.
+- `GET /api/gyms/near`: radius search on the spatial index.
+- **Map links:** every gym carries Google Maps search and directions links plus an OSM link (`services/geo.mapLinks`).
+- City aliasing is shared (`services/normalize.citySpellings`).
+
+**Fixed along the way (found by the new contrast probe):**
+- Leaflet markers painted over the fixed nav, and Leaflet's grey container background overrode the dark one.
+- The "Sample" tag was 4.2:1.
+- On mobile, the CTA band's small print sat over the bright part of the photo.
+
+**Gates**
+- `tests/e2e/contrast.spec.js`: every visible text block measured on the rendered page over the **brightest video frame**. All pass (4 pages × 2 widths).
+- axe WCAG 2.1 A/AA on landing, login, registration and privacy: 0 violations.
+- Landing e2e (stats, carousel, mobile menu, poster vs video, lazy map), plus updated Phase 1 flows: e2e 28/28.
+- New visual baselines for the rebuilt pages at 360 / 390 / 768 / 1440 / 1920. Pages not yet rebuilt keep their v2 baselines. Visual 30/30, stable across two runs.
+- Jest 105/105, lint clean.
+
+**Still open:** `style-src 'unsafe-inline'` remains until Phase G rebuilds the last legacy pages (their inline `style=` attributes). The source videos stay in `public/` until then too.
+
 ## v3 Phase A: backbone and security (2026-09-24)
 
 No visual change: the old visual suite still passes with 0 diffs.

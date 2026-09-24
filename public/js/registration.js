@@ -1,26 +1,29 @@
 // registration.html
-document.getElementById('registerForm').addEventListener('submit', async event => {
-  event.preventDefault();
-  const errorMessage = document.getElementById('errorMessage');
-  errorMessage.innerText = '';
+(function () {
+  const TS = window.TS;
+  const form = document.getElementById('registerForm');
 
-  const body = {
-    email: document.getElementById('email').value,
-    name: document.getElementById('name').value,
-    role: document.getElementById('role').value.trim().toLowerCase(),
-    password: document.getElementById('password').value,
-    confirmPassword: document.getElementById('confirmPassword').value,
-  };
-
-  try {
-    const { ok, data } = await TS.api('/api/auth/register', { method: 'POST', body });
-    if (ok) {
-      window.location.href = 'login.html';
-    } else {
-      errorMessage.innerText = data.error || 'Registration failed.';
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const body = {
+      email: form.email.value.trim(),
+      name: form.name.value.trim(),
+      role: form.querySelector('input[name=role]:checked').value,
+      password: form.password.value,
+      confirmPassword: form.confirmPassword.value,
+    };
+    if (body.password !== body.confirmPassword) {
+      return TS.formError(form, { error: 'Passwords do not match', details: [{ field: 'confirmPassword' }] });
     }
-  } catch (error) {
-    console.error('Registration error:', error);
-    errorMessage.innerText = 'Something went wrong. Try again.';
-  }
-});
+    TS.busy(form, true);
+    try {
+      const { ok, data } = await TS.api('/api/auth/register', { method: 'POST', body });
+      if (ok) return location.assign(data.next || '/login.html?registered=1');
+      TS.formError(form, data, 'Registration failed.');
+    } catch {
+      TS.formError(form, null, 'Something went wrong. Please try again.');
+    } finally {
+      TS.busy(form, false);
+    }
+  });
+})();

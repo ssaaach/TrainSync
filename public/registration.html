@@ -1,43 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Now</title>
-    <link rel="icon" type="image/png" href="webicon1.png">
-    <link rel="stylesheet" href="registration.css">
-    <link rel="stylesheet" href="css/trainsync-ext.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create your account · TrainSync</title>
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
-    <div class="title"><h1>TrainSync</h1></div>
-    <video autoplay muted loop id="bg-video">
-        <source src="backgroundhome.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <form id="registerForm">
-        <div class="Registration">
-            <h4>Create Account</h4>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required><br>
-            
-            <label for="username">Name</label>
-            <input type="text" id="name" name="name" required><br>
-            
-            <label for="role">Role</label>
-            <input type="text" id="role" name="role" required placeholder="trainer / trainee" list="role-options" autocomplete="off"><datalist id="role-options"><option value="trainer"><option value="trainee"></datalist><br>
-            
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required><br>
-            
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
-            
-            <button type="submit">Create Account</button>
-            <p id="errorMessage" style="color: rgb(211, 196, 196);"></p>
-            <p>Already have an account? <a class="loginpagelink" href="login.html">Log In</a></p>
+<body data-page="register">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="a-page">
+    <section class="a-card ts-glass ts-glass--strong" aria-labelledby="reg-title">
+      <div class="a-card__head">
+        <p class="ts-eyebrow">Get started</p>
+        <h1 id="reg-title">Create your account</h1>
+        <p class="ts-muted">Next you'll choose what to share and set up your profile. It takes about 5 minutes.</p>
+      </div>
+      <form id="registerForm" class="a-form" novalidate>
+        <fieldset class="ts-field a-fieldset">
+          <legend class="ts-label">I am a</legend>
+          <div class="ts-segmented" role="radiogroup">
+            <input type="radio" id="role-trainee" name="role" value="trainee" checked><label for="role-trainee">Trainee</label>
+            <input type="radio" id="role-trainer" name="role" value="trainer"><label for="role-trainer">Trainer</label>
+          </div>
+        </fieldset>
+        <div class="ts-field">
+          <label class="ts-label" for="name">Full name</label>
+          <input class="ts-input" type="text" id="name" name="name" autocomplete="name" maxlength="100" required>
         </div>
-    </form>
-    <script src="js/common.js"></script>
-    <script src="js/registration.js"></script>
+        <div class="ts-field">
+          <label class="ts-label" for="email">Email</label>
+          <input class="ts-input" type="email" id="email" name="email" autocomplete="email" maxlength="100" required>
+        </div>
+        <div class="a-grid-2">
+          <div class="ts-field">
+            <label class="ts-label" for="password">Password</label>
+            <input class="ts-input" type="password" id="password" name="password" autocomplete="new-password" minlength="8" required aria-describedby="pw-hint">
+          </div>
+          <div class="ts-field">
+            <label class="ts-label" for="confirmPassword">Confirm password</label>
+            <input class="ts-input" type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p id="pw-hint" class="ts-hint">At least 8 characters.</p>
+        <p id="errorMessage" class="ts-form-error" role="alert"></p>
+        <button class="ts-btn ts-btn--gold ts-btn--lg ts-btn--block" type="submit">Create account</button>
+        <p class="ts-hint">By creating an account you agree to our <a class="ts-gold" href="/privacy.html">privacy policy</a>. You'll choose what data to share in the next step.</p>
+      </form>
+      <p class="a-alt">Already have an account? <a class="loginpagelink" href="/login.html">Log in</a></p>
+    </section>
+  </main>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/auth-forms.js"></script>
+  <script src="/js/registration.js"></script>
 </body>
 </html>

@@ -39,4 +39,21 @@ const normalizeRole = v => {
   return config.roles.includes(r) ? r : null;
 };
 
-module.exports = { normalizeGoal, normalizeBodyType, normalizeRole, clean };
+// City spelling variants -> every spelling that should match, canonical first.
+const CITY_GROUPS = [
+  ['bengaluru', 'bangalore'],
+  ['mumbai', 'bombay'],
+  ['chennai', 'madras'],
+  ['delhi', 'new delhi'],
+  ['gurugram', 'gurgaon'],
+  ['kolkata', 'calcutta'],
+];
+const CITY_INDEX = new Map(CITY_GROUPS.flatMap(g => g.map(name => [name, g])));
+
+const cityKey = v => String(v ?? '').trim().toLowerCase().replace(/s+/g, ' ');
+// All spellings to query for a city ("Bangalore" -> ['bengaluru', 'bangalore']).
+const citySpellings = v => CITY_INDEX.get(cityKey(v)) || [cityKey(v)];
+// One canonical key per city ("Bangalore" and "Bengaluru" -> 'bengaluru').
+const canonicalCity = v => citySpellings(v)[0];
+
+module.exports = { normalizeGoal, normalizeBodyType, normalizeRole, clean, citySpellings, canonicalCity, cityKey };

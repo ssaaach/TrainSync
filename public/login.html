@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Now</title>
-    <link rel="icon" type="image/png" href="webicon1.png">
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="css/trainsync-ext.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in · TrainSync</title>
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
-    <div class="title"><h1>TrainSync</h1></div>
-    <video autoplay muted loop id="bg-video">
-        <source src="backgroundhome.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <form id="loginForm">
-        <div class="Registration">
-            <h4>Login Now</h4>
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" required><br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <button type="submit">Log In</button>
-            <p id="errorMessage" style="color: red;"></p>
-            <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
+<body data-page="login">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="a-page">
+    <section class="a-card ts-glass ts-glass--strong" aria-labelledby="login-title">
+      <div class="a-card__head">
+        <p class="ts-eyebrow">Welcome back</p>
+        <h1 id="login-title">Log in to TrainSync</h1>
+      </div>
+      <form id="loginForm" class="a-form" novalidate>
+        <div class="ts-field">
+          <label class="ts-label" for="email">Email</label>
+          <input class="ts-input" type="email" id="email" name="email" autocomplete="email" required>
         </div>
-    </form>
-    <script src="js/common.js"></script>
-    <script src="js/login.js"></script>
+        <div class="ts-field">
+          <label class="ts-label" for="password">Password</label>
+          <div class="a-pw">
+            <input class="ts-input" type="password" id="password" name="password" autocomplete="current-password" required>
+            <button class="ts-icon-btn ts-icon-btn--sm" type="button" aria-label="Show password" aria-pressed="false" data-pw-toggle>
+              <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-eye"></use></svg>
+            </button>
+          </div>
+        </div>
+        <p id="errorMessage" class="ts-form-error" role="alert"></p>
+        <button class="ts-btn ts-btn--gold ts-btn--lg ts-btn--block" type="submit">Log in</button>
+      </form>
+      <p class="a-alt">New to TrainSync? <a class="registerpagelink" href="/registration.html">Create an account</a></p>
+    </section>
+  </main>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/auth-forms.js"></script>
+  <script src="/js/login.js"></script>
 </body>
 </html>
-
-
-  

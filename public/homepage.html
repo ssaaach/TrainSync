@@ -1,81 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainSync</title>
-  <link rel="icon" type="image/png" href="webicon1.png">
-  <link rel="stylesheet" href="homepage.css">
-  <link rel="stylesheet" href="css/trainsync-ext.css">
+  <title>TrainSync: the right trainer, and a plan built for your body</title>
+  <meta name="description" content="TrainSync matches you with a certified trainer who fits your goals, schedule and personality, and builds a workout and Indian diet plan around your body. Gyms near you included.">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/poppins-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/landing.css">
 </head>
-<body>
-  <video autoplay muted loop id="bg-video">
-    <source src="backgroundhome.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+<body data-page="landing">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav class="l-navslot">
+    <noscript>
+      <nav class="ts-nav" aria-label="Main"><div class="ts-container ts-nav__inner">
+        <a class="ts-logo" href="/homepage.html"><img src="/webicon1.png" alt="" width="40" height="40"><span>Train<b>Sync</b></span></a>
+        <a class="ts-btn ts-btn--ghost ts-btn--sm" href="/login.html">Log in</a>
+      </div></nav>
+    </noscript>
+  </header>
 
-  <div class="main-container">
-    <nav class="navbar">
-      <ul>
-        <li><a href="homepage.html"><img src="webicon1.png" height="60px" width="60px"><span></span></a></li>
-        <li><a href="trainermatch.html">Find a Trainer</a></li>
-        <li><a href="workoutplans.html">Workout Plans</a></li>
-        <li><a href="dietplans.html">Diet Plans</a></li>
-        <li><a href="gyms.html">Find a Gym</a></li>
-        <li id="nav-login"><a href="login.html">Login</a></li>
-      </ul>
-    </nav>
-
-    <!-- Sidebar (initially hidden) -->
-    <div id="sidebar" class="sidebar" style="display: none; position: absolute; top: 70px; right: 10px; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; z-index: 999;">
-      <a href="updateprofile.html" style="display: block; color: white; text-decoration: none; margin-bottom: 10px;">Update Profile</a>
-      <a href="#" id="logout-btn" style="display: block; color: white; text-decoration: none;">Logout</a>
-    </div>
-
-    <div class="image-container">
-      <video autoplay muted loop>
-        <source src="trainertrainee1.mp4" type="video/mp4">
-        Trainer and trainee
-      </video>
-      <div class="overlay-text">
-        <h3>Stay Fit,</h3>
-        <h3>Stay Strong</h3>
+  <main id="main">
+    <!-- ============================================================ hero -->
+    <section class="l-hero" aria-labelledby="hero-title">
+      <div class="ts-container ts-container--wide l-hero__inner">
+        <div class="l-hero__copy">
+          <p class="ts-eyebrow ts-reveal">Trainer matching · Workout plans · Indian diet plans</p>
+          <h1 id="hero-title" class="ts-h1 l-hero__title ts-reveal" data-delay="1">Stay fit,<br><span class="ts-gold">stay strong.</span></h1>
+          <p class="l-hero__sub ts-reveal" data-delay="2">Get matched with a coach who fits your goals, your schedule and the way you like to be coached, with a workout and diet plan built around your body.</p>
+          <div class="l-hero__ctas ts-reveal" data-delay="3">
+            <a class="ts-btn ts-btn--gold ts-btn--lg" href="/registration.html">Get started <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-arrow-right"></use></svg></a>
+            <a class="ts-btn ts-btn--ghost ts-btn--lg" href="/login.html">Log in</a>
+          </div>
+        </div>
+        <aside class="l-stat ts-glass ts-reveal" data-delay="3" aria-label="TrainSync in numbers" data-stats>
+          <div class="l-stat__icons" aria-hidden="true">
+            <span><svg class="ts-icon"><use href="/icons.svg#i-pin"></use></svg></span>
+            <span><svg class="ts-icon"><use href="/icons.svg#i-dumbbell"></use></svg></span>
+            <span><svg class="ts-icon"><use href="/icons.svg#i-bowl"></use></svg></span>
+          </div>
+          <p class="l-stat__big"><span class="ts-live-dot" aria-hidden="true"></span><strong data-stat="gyms">700+</strong> gyms mapped</p>
+          <p class="l-stat__small">in <span data-stat="cities">7</span> Indian cities · <span data-stat="exercises">870+</span> exercises · <span data-stat="dishes">180+</span> Indian dishes</p>
+        </aside>
       </div>
-    </div>
+    </section>
 
-    <div class="info-content">
-      <div class="info-text">
-        <br>
-        <p>Find the perfect trainer near you and start your fitness journey today.</p>
-        <p>Access personalized diet plans and workout routines tailored to your goals.</p>
-        <p>Train smarter, not harder—match with the right coach for your needs.</p>
-        <br><br>
+    <!-- ============================================================ what it is -->
+    <section id="about" class="ts-section l-about" aria-labelledby="about-title">
+      <div class="ts-container ts-container--wide ts-split">
+        <h2 id="about-title" class="ts-h2 l-scrim-text ts-reveal">Transform how<br>you train.</h2>
+        <div class="ts-glass ts-card ts-reveal" data-delay="1">
+          <p class="l-about__text">TrainSync takes your goals, measurements, schedule and coaching preferences (only the ones you choose to share) and does three things. It builds a workout and Indian diet plan you can actually follow. It ranks certified trainers by how well they fit you, and shows you why. And it finds gyms near you.</p>
+        </div>
       </div>
-      <div class="get-started-button">
-        <button><a href="registration.html">Get Started</a></button>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <footer>
-    <div class="footer-left">
-      <img src="webicon1.png" height="40px" width="40px">
-      <div class="footerinfo">
-        <p>Our mission is to make fitness accessible and personalized for everyone.</p>
-        <p>We connect trainees with the right trainers, provide structured workout plans, and offer </p>
-        <p>tailored diet guidance—all in one place. Whether you're just starting or pushing your limits,</p>
-        <p>we’re here to help you achieve your goals, one step at a time.</p>
-      </div>
-    </div>
+    <!-- ============================================================ features -->
+    <section id="features" class="ts-section l-features-section" aria-labelledby="features-title">
+      <div class="ts-container ts-container--wide">
+        <div class="ts-split l-head">
+          <h2 id="features-title" class="ts-h2 l-scrim-text ts-reveal">Four tools.<br>One plan for you.</h2>
+          <p class="l-head__text ts-glass ts-reveal" data-delay="1">Each one works alone, and they work better together: your trainer sees the plan, the plan adapts to what you log, and the gym finder knows where your trainer coaches.</p>
+        </div>
 
-    <div class="contactinfo">
-      <p><strong>Contact Information</strong></p><br>
-      <a href="https://www.instagram.com/sachin._1275/?hl=en" target="_blank"><img src="insta logo.png" height="50px" width="50px"></a>
-      <a href="mailto:sachin.mitblr2023@learner.manipal.edu" target="_blank"><img src="emaail.png" height="50px" width="50px"></a>
-      <a href="https://www.linkedin.com/in/sachin-bhat-98397b2a0/" target="_blank"><img src="linkedin logo.png" height="37px" width="37px"></a>
-    </div>        
-  </footer>
-  <script src="js/common.js"></script>
-  <script src="js/homepage.js"></script>
+        <div class="l-features">
+          <a class="l-feature l-feature--wide ts-reveal" href="/trainermatch.html">
+            <span class="ts-badge ts-badge--corner" aria-hidden="true"><svg class="ts-icon"><use href="/icons.svg#i-match"></use></svg></span>
+            <div class="l-feature__media">
+              <video class="l-feature__video" muted loop playsinline preload="none" poster="/media/coach.webp" data-lazy-video aria-hidden="true">
+                <source data-src="/media/coach.webm" type="video/webm">
+                <source data-src="/media/coach.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="l-feature__foot">
+              <h3 class="l-feature__title">AI Trainer Match</h3>
+              <p class="l-feature__desc">Trainers ranked by your goals, schedule overlap, coaching style, personality fit, budget and distance, with a clear breakdown of why each one fits.</p>
+            </div>
+          </a>
+
+          <a class="l-feature l-feature--tall ts-reveal" data-delay="1" href="/workoutplans.html">
+            <span class="ts-badge ts-badge--corner" aria-hidden="true"><svg class="ts-icon"><use href="/icons.svg#i-dumbbell"></use></svg></span>
+            <span class="l-art l-art--bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <h3 class="l-feature__vlabel">Workout Plans</h3>
+            <p class="l-feature__tip">4 to 12 week periodised blocks from 870+ exercises, fitted to your equipment, time and injuries.</p>
+          </a>
+
+          <a class="l-feature l-feature--tall ts-reveal" data-delay="2" href="/dietplans.html">
+            <span class="ts-badge ts-badge--corner" aria-hidden="true"><svg class="ts-icon"><use href="/icons.svg#i-bowl"></use></svg></span>
+            <span class="l-art l-art--ring" aria-hidden="true"><i></i></span>
+            <h3 class="l-feature__vlabel">Diet Plans</h3>
+            <p class="l-feature__tip">7-day Indian meal plans that hit your calories and protein, for veg, vegan, Jain, egg or non-veg.</p>
+          </a>
+
+          <a class="l-feature l-feature--tall ts-reveal" data-delay="3" href="/gyms.html">
+            <span class="ts-badge ts-badge--corner" aria-hidden="true"><svg class="ts-icon"><use href="/icons.svg#i-pin"></use></svg></span>
+            <span class="l-art l-art--dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <h3 class="l-feature__vlabel">Gym Finder</h3>
+            <p class="l-feature__tip">Gyms near you on a live map, with distance, opening hours and directions in Google Maps.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ how it works + gym finder -->
+    <section id="how" class="ts-section" aria-labelledby="how-title">
+      <div class="ts-container ts-container--wide l-how">
+        <div class="l-how__main">
+          <div class="l-how__head">
+            <div>
+              <h2 id="how-title" class="ts-h2 l-scrim-text ts-reveal">How it works</h2>
+              <p class="l-how__sub l-scrim-text ts-reveal" data-delay="1">Five steps from sign-up to your first session, and you control what you share at every one.</p>
+            </div>
+            <div class="l-how__arrows ts-reveal" data-delay="2">
+              <button class="ts-icon-btn" type="button" aria-label="Previous step" aria-controls="how-track" data-carousel-prev><svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-arrow-left"></use></svg></button>
+              <button class="ts-icon-btn" type="button" aria-label="Next step" aria-controls="how-track" data-carousel-next><svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-arrow-right"></use></svg></button>
+            </div>
+          </div>
+
+          <ol class="l-steps ts-reveal" id="how-track" tabindex="0" aria-label="Steps">
+            <li class="l-step">
+              <span class="l-step__num">01</span>
+              <svg class="ts-icon l-step__icon" aria-hidden="true"><use href="/icons.svg#i-shield"></use></svg>
+              <h3>Create your profile</h3>
+              <p>Sign up as a trainee or a trainer, then choose exactly what you share. Body metrics, health, personality, interests and location each have their own switch.</p>
+            </li>
+            <li class="l-step">
+              <span class="l-step__num">02</span>
+              <svg class="ts-icon l-step__icon" aria-hidden="true"><use href="/icons.svg#i-chart"></use></svg>
+              <h3>Know your body</h3>
+              <p>From height, weight, waist and neck we estimate body fat, lean mass and daily energy needs. Every number is labelled as the estimate it is.</p>
+            </li>
+            <li class="l-step">
+              <span class="l-step__num">03</span>
+              <svg class="ts-icon l-step__icon" aria-hidden="true"><use href="/icons.svg#i-calendar"></use></svg>
+              <h3>Get your plans</h3>
+              <p>A periodised training block and a 7-day Indian meal plan that hit your calorie, protein and fibre targets, with the reasoning shown for every choice.</p>
+            </li>
+            <li class="l-step">
+              <span class="l-step__num">04</span>
+              <svg class="ts-icon l-step__icon" aria-hidden="true"><use href="/icons.svg#i-match"></use></svg>
+              <h3>Browse ranked trainers</h3>
+              <p>Every trainer card shows a compatibility score and the top reasons you fit: goals, schedule, coaching style, distance and budget.</p>
+            </li>
+            <li class="l-step">
+              <span class="l-step__num">05</span>
+              <svg class="ts-icon l-step__icon" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg>
+              <h3>Both say yes</h3>
+              <p>You request a session and the trainer accepts. Contact details unlock only after both of you opt in, and you can block or report anyone at any time.</p>
+            </li>
+          </ol>
+        </div>
+
+        <aside id="gyms-preview" class="l-gymcard ts-reveal" data-delay="1" aria-labelledby="gymcard-title">
+          <span class="ts-badge ts-badge--corner" aria-hidden="true"><svg class="ts-icon"><use href="/icons.svg#i-pin"></use></svg></span>
+          <div class="l-gymcard__map" data-minimap data-lat="12.9716" data-lng="77.6412" role="img" aria-label="Map of gyms near central Bengaluru">
+            <img class="l-gymcard__placeholder" src="/media/smoke-wide.webp" alt="">
+          </div>
+          <div class="l-gymcard__foot">
+            <h3 id="gymcard-title" class="l-gymcard__title">Gym Finder</h3>
+            <p class="l-gymcard__meta"><strong data-stat="gyms">700+</strong> gyms in Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune and Kolkata</p>
+            <a class="ts-btn ts-btn--gold ts-btn--sm" href="/gyms.html">Find gyms near you</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================ what you get -->
+    <section class="ts-section" aria-labelledby="get-title">
+      <div class="ts-container ts-container--wide">
+        <div class="ts-split l-head">
+          <h2 id="get-title" class="ts-h2 l-scrim-text ts-reveal">What you get</h2>
+          <p class="l-head__text ts-glass ts-reveal" data-delay="1">Plans that show their working, matches that explain themselves, and progress you can see. The previews below are illustrative samples.</p>
+        </div>
+
+        <div class="l-get">
+          <figure class="l-get__item ts-reveal">
+            <div class="l-get__tile ts-glass">
+              <span class="ts-tag ts-tag--warm">Sample</span>
+              <p class="l-plan__day">Week 3 · Day 2 · Lower body</p>
+              <ul class="l-plan">
+                <li><span>Goblet squat</span><span>3 × 8–10 · RPE 7</span></li>
+                <li><span>Romanian deadlift</span><span>3 × 10 · RPE 7</span></li>
+                <li><span>Walking lunge</span><span>2 × 12 / leg</span></li>
+                <li><span>Plank</span><span>3 × 40 s</span></li>
+              </ul>
+              <p class="l-plan__meal"><svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-bowl"></use></svg>Dinner: paneer bhurji + 2 rotis · 31 g protein</p>
+            </div>
+            <figcaption>Plan preview</figcaption>
+          </figure>
+
+          <figure class="l-get__item ts-reveal" data-delay="1">
+            <div class="l-get__tile ts-glass">
+              <span class="ts-tag ts-tag--warm">Sample</span>
+              <div class="l-why">
+                <div class="ts-meter"><span class="ts-meter__label">Goals</span><span class="ts-progress"><span class="l-w92"></span></span><span class="ts-meter__value">92</span></div>
+                <div class="ts-meter"><span class="ts-meter__label">Schedule</span><span class="ts-progress"><span class="l-w84"></span></span><span class="ts-meter__value">84</span></div>
+                <div class="ts-meter"><span class="ts-meter__label">Coaching style</span><span class="ts-progress"><span class="l-w78"></span></span><span class="ts-meter__value">78</span></div>
+                <div class="ts-meter"><span class="ts-meter__label">Personality</span><span class="ts-progress"><span class="l-w71"></span></span><span class="ts-meter__value">71</span></div>
+              </div>
+              <p class="l-why__reasons">Specialises in fat loss · ~2 km away · both prefer early mornings</p>
+            </div>
+            <figcaption>Why you matched</figcaption>
+          </figure>
+
+          <figure class="l-get__item ts-reveal" data-delay="2">
+            <div class="l-get__tile ts-glass">
+              <span class="ts-tag ts-tag--warm">Sample</span>
+              <svg class="l-spark" viewBox="0 0 240 90" aria-hidden="true" preserveAspectRatio="none">
+                <path class="l-spark__area" d="M0 22 L30 26 L60 24 L90 34 L120 38 L150 46 L180 52 L210 58 L240 64 L240 90 L0 90 Z"/>
+                <path class="l-spark__line" d="M0 22 L30 26 L60 24 L90 34 L120 38 L150 46 L180 52 L210 58 L240 64"/>
+              </svg>
+              <div class="l-progress-stats">
+                <p><strong>−3.4 kg</strong><span>in 8 weeks</span></p>
+                <p><strong>86%</strong><span>sessions done</span></p>
+              </div>
+            </div>
+            <figcaption>Progress tracking</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ CTA band -->
+    <section class="l-cta" aria-labelledby="cta-title">
+      <div class="ts-container ts-container--wide">
+        <div class="l-cta__band ts-reveal">
+          <div class="l-cta__copy">
+            <h2 id="cta-title" class="ts-h2">Ready to train with<br>the right coach?</h2>
+            <p>Free to join. Your data stays yours: export or delete it at any time.</p>
+            <div class="l-hero__ctas">
+              <a class="ts-btn ts-btn--gold ts-btn--lg" href="/registration.html">Get started</a>
+              <a class="ts-btn ts-btn--ghost ts-btn--lg" href="/login.html">Log in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-ts-footer></footer>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/landing.js"></script>
 </body>
 </html>

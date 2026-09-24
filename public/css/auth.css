@@ -1,0 +1,16 @@
+/* Login, registration and profile forms: one centred glass card on the smoke. */
+.a-page { min-height: 100svh; display: grid; place-items: center; padding: calc(var(--nav-h) + var(--s-6)) var(--gutter) var(--s-7); }
+.a-card { width: min(100%, 460px); padding: clamp(24px, 5vw, 40px); border-radius: var(--r-xl); }
+.a-card--wide { width: min(100%, 640px); }
+.a-card__head { margin-bottom: var(--s-6); display: grid; gap: var(--s-2); }
+.a-card__head h1 { font-size: var(--fs-2xl); }
+.a-form { display: grid; gap: var(--s-4); }
+.a-form .ts-btn--gold { margin-top: var(--s-2); }
+.a-alt { margin-top: var(--s-5); font-size: var(--fs-sm); color: var(--c-text-muted); text-align: center; }
+.a-alt a { color: var(--c-gold); font-weight: var(--fw-medium); }
+.a-grid-2 { display: grid; gap: var(--s-4); }
+@media (min-width: 560px) { .a-grid-2 { grid-template-columns: 1fr 1fr; } }
+.a-pw { position: relative; }
+.a-pw .ts-input { padding-right: 56px; }
+.a-pw button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+.a-fieldset { border: 0; padding: 0; margin: 0; }

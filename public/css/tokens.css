@@ -1,0 +1,122 @@
+/* TrainSync design tokens — the single source of shared values.
+ * Identity: black smoke video, dark glass, gold #ffcc00 accent, #f5f5f5 text,
+ * Poppins. Every page and component is built from these variables. */
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/poppins-latin-300-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/poppins-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/poppins-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/poppins-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/poppins-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  color-scheme: dark;
+
+  /* ---------------------------------------------------------------- colour */
+  --c-bg: #050505;
+  --c-text: #f5f5f5;
+  --c-text-soft: #e2ddd8;       /* secondary copy on glass (≥ 11:1) */
+  --c-text-muted: #b5aea8;      /* captions, meta (≥ 7:1 on glass) */
+  --c-text-dim: #948d87;        /* fine print (≥ 4.6:1 on glass) */
+
+  --c-gold: #ffcc00;
+  --c-gold-hover: #e6b800;
+  --c-gold-glow: rgba(255, 204, 0, 0.7);
+  --c-gold-soft: rgba(255, 204, 0, 0.14);
+  --c-gold-line: rgba(255, 204, 0, 0.45);
+  --c-on-gold: #121212;
+
+  /* Warm neutral from the original hero overlay; secondary surfaces only. */
+  --c-warm: rgb(213, 173, 166);
+  --c-warm-surface: rgba(213, 173, 166, 0.08);
+  --c-warm-line: rgba(213, 173, 166, 0.28);
+
+  --c-glass: rgba(20, 20, 20, 0.65);
+  --c-glass-strong: rgba(14, 14, 14, 0.84);
+  --c-glass-soft: rgba(255, 255, 255, 0.06);
+  --c-glass-hover: rgba(255, 255, 255, 0.1);
+  --c-line: rgba(255, 255, 255, 0.12);
+  --c-line-strong: rgba(255, 255, 255, 0.24);
+  --c-scrim: rgba(0, 0, 0, 0.55);
+
+  --c-input: rgba(255, 255, 255, 0.08);
+  --c-input-border: #5a5a5a;
+  --c-input-focus: #bfb2af;
+  --c-focus-ring: #ffcc00;
+
+  --c-success: #7fe0a8;
+  --c-danger: #ff9a8a;
+  --c-info: #9cc9ff;
+
+  /* ---------------------------------------------------------------- shape */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;                 /* original glass panels */
+  --r-lg: 20px;
+  --r-xl: 26px;                 /* reference cards: 24–28 px */
+  --r-2xl: 36px;
+  --r-pill: 999px;
+
+  --blur-sm: 5px;               /* original panels */
+  --blur-md: 14px;
+  --blur-lg: 24px;
+
+  --sh-1: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --sh-2: 0 14px 44px rgba(0, 0, 0, 0.55);
+  --sh-3: 0 24px 80px rgba(0, 0, 0, 0.65);
+  --sh-gold: 0 0 26px rgba(255, 204, 0, 0.32);
+
+  /* ---------------------------------------------------------------- space (4 px scale) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  --container: 1200px;
+  --container-wide: 1320px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-y: clamp(64px, 9vw, 128px);
+  --nav-h: 72px;
+
+  /* ---------------------------------------------------------------- type */
+  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: clamp(1.2rem, 1.05rem + 0.6vw, 1.45rem);
+  --fs-2xl: clamp(1.5rem, 1.15rem + 1.5vw, 2.2rem);
+  --fs-3xl: clamp(1.9rem, 1.3rem + 2.6vw, 3.1rem);
+  --fs-display: clamp(2.6rem, 1.3rem + 5.8vw, 5.6rem);
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.22;
+  --lh-body: 1.6;
+  --tracking-caps: 0.14em;
+
+  /* ---------------------------------------------------------------- motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 700ms;
+
+  /* ---------------------------------------------------------------- layers */
+  --z-bg: -2;
+  --z-scrim: -1;
+  --z-nav: 50;
+  --z-float: 60;
+  --z-sheet: 80;
+  --z-toast: 90;
+}

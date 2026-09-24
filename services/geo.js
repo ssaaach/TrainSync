@@ -56,3 +56,17 @@ function nearest(candidates, lat, lng, maxKm = Infinity) {
 }
 
 module.exports = { haversineKm, boundingBox, bboxPolygonWkt, radiusQuery, nearest, EARTH_RADIUS_KM };
+
+// Map links for a place. Google Maps URLs need no API key; a coordinates
+// query drops a pin exactly on the gym. OSM is where the data comes from.
+function mapLinks(lat, lng) {
+  const la = Number(lat).toFixed(6);
+  const ln = Number(lng).toFixed(6);
+  return {
+    google: `https://www.google.com/maps/search/?api=1&query=${la},${ln}`,
+    directions: `https://www.google.com/maps/dir/?api=1&destination=${la},${ln}`,
+    osm: `https://www.openstreetmap.org/?mlat=${la}&mlon=${ln}#map=17/${la}/${ln}`,
+  };
+}
+
+module.exports.mapLinks = mapLinks;
