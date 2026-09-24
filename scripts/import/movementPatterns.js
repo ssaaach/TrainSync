@@ -11,7 +11,7 @@ const RULES = [
   ['cardio', e => e.category === 'cardio'],
   ['cardio', e => e.category === 'plyometrics' && LOWER.has(e.primary)],
   ['carry', e => /\b(farmer|carry|yoke|suitcase|waiter'?s? walk|sled drag|sled push)\b/.test(e.name)],
-  ['lunge', e => /\b(lunge|split squat|step[- ]?up|bulgarian|pistol)\b/.test(e.name)],
+  ['lunge', e => /\b(lunges?|split squats?|step[- ]?ups?|bulgarian|pistol)\b/.test(e.name)],
   ['hinge', e => /\b(deadlift|good ?morning|hip thrust|glute bridge|bridge|kettlebell swing|swing|romanian|rdl|pull[- ]through|hyperextension|back extension|clean|snatch|glute ham|reverse hyper)\b/.test(e.name)],
   ['squat', e => /\b(squat|leg press|hack)\b/.test(e.name)],
   ['core', e => e.primary === 'abdominals' || /\b(plank|crunch|sit-?up|ab roller|rollout|russian twist|leg raise|v-up|dead bug|pallof|flutter kick)\b/.test(e.name)],

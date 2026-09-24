@@ -132,10 +132,3 @@ test('gym search reports a city with no gyms', async ({ page }) => {
   await expect(page.locator('#gymResults')).toHaveText('No gyms found in this city.');
 });
 
-test('workout search reports an unknown goal instead of crashing', async ({ page }) => {
-  await page.goto('/workoutplans.html');
-  await page.fill('#currentType', 'mesomorph');
-  await page.fill('#goalType', 'shred');
-  await page.click('button');
-  await expect(page.locator('#errorMessage')).toHaveText('Goal must be cut, bulk, lean bulk or maintenance.');
-});

@@ -23,6 +23,7 @@ const V3_PAGES = [
   { name: 'login', path: '/login.html' },
   { name: 'registration', path: '/registration.html' },
   { name: 'privacy', path: '/privacy.html' },
+  { name: 'workoutplans', path: '/workoutplans.html' },
 ];
 
 const LEGACY_VIEWPORTS = {
@@ -32,7 +33,7 @@ const LEGACY_VIEWPORTS = {
 const LEGACY_PAGES = [
   { name: 'homepage1', path: '/homepage1.html', setup: page => loginAs(page, 'trainee') },
   { name: 'trainermatch', path: '/trainermatch.html' },
-  { name: 'workoutplans', path: '/workoutplans.html' },
+
   { name: 'dietplans', path: '/dietplans.html' },
   { name: 'gyms', path: '/gyms.html' },
 ];

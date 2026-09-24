@@ -1,0 +1,982 @@
+{
+  "_comment": "Tunables for services/workoutGenerator.js. Evidence notes: rep ranges follow the ACSM position stand on progression models (2009) and Schoenfeld et al. (2017, 2021) on hypertrophy loading; weekly set volume 10-20 hard sets per muscle group for trained lifters (Schoenfeld, Ogborn & Krieger 2017), fewer for beginners; RPE per Helms et al. (2016). MET values: 2024 Adult Compendium of Physical Activities (Herrmann et al., J Sport Health Sci 2024), cited.",
+  "version": "wg-v3.0",
+  "weeks": {
+    "default": {
+      "beginner": 6,
+      "intermediate": 8,
+      "advanced": 10
+    },
+    "min": 4,
+    "max": 12
+  },
+  "emphasis": {
+    "_order": "First match wins, from the trainee's goals / body goal.",
+    "rules": [
+      {
+        "if": {
+          "goals": "strength"
+        },
+        "then": "strength"
+      },
+      {
+        "if": {
+          "goals": "endurance"
+        },
+        "then": "endurance"
+      },
+      {
+        "if": {
+          "goals": "mobility-yoga",
+          "only": true
+        },
+        "then": "mobility"
+      },
+      {
+        "if": {
+          "goal": [
+            "bulk",
+            "lean-bulk"
+          ]
+        },
+        "then": "hypertrophy"
+      },
+      {
+        "if": {
+          "goals": "muscle-gain"
+        },
+        "then": "hypertrophy"
+      },
+      {
+        "if": {
+          "goal": [
+            "cut"
+          ]
+        },
+        "then": "fat-loss"
+      },
+      {
+        "if": {
+          "goals": "fat-loss"
+        },
+        "then": "fat-loss"
+      }
+    ],
+    "default": "general"
+  },
+  "schemes": {
+    "strength": {
+      "compound": [
+        3,
+        6
+      ],
+      "accessory": [
+        6,
+        10
+      ],
+      "isolation": [
+        8,
+        12
+      ],
+      "restCompound": 180,
+      "restAccessory": 120,
+      "restIsolation": 75,
+      "sets": 4,
+      "label": "Strength: heavy, low-rep compounds with long rests"
+    },
+    "hypertrophy": {
+      "compound": [
+        6,
+        10
+      ],
+      "accessory": [
+        8,
+        12
+      ],
+      "isolation": [
+        10,
+        15
+      ],
+      "restCompound": 120,
+      "restAccessory": 90,
+      "restIsolation": 60,
+      "sets": 3,
+      "label": "Hypertrophy: moderate loads, 6-15 reps close to failure"
+    },
+    "fat-loss": {
+      "compound": [
+        8,
+        12
+      ],
+      "accessory": [
+        10,
+        15
+      ],
+      "isolation": [
+        12,
+        15
+      ],
+      "restCompound": 90,
+      "restAccessory": 60,
+      "restIsolation": 45,
+      "sets": 3,
+      "label": "Fat loss: keep lifting heavy enough to hold muscle, shorter rests, conditioning finishers"
+    },
+    "endurance": {
+      "compound": [
+        12,
+        20
+      ],
+      "accessory": [
+        15,
+        20
+      ],
+      "isolation": [
+        15,
+        20
+      ],
+      "restCompound": 60,
+      "restAccessory": 45,
+      "restIsolation": 30,
+      "sets": 2,
+      "label": "Muscular endurance: light loads, high reps, short rests"
+    },
+    "mobility": {
+      "compound": [
+        8,
+        12
+      ],
+      "accessory": [
+        10,
+        12
+      ],
+      "isolation": [
+        12,
+        15
+      ],
+      "restCompound": 75,
+      "restAccessory": 60,
+      "restIsolation": 45,
+      "sets": 2,
+      "label": "Mobility-first: controlled strength work plus longer mobility blocks"
+    },
+    "general": {
+      "compound": [
+        8,
+        12
+      ],
+      "accessory": [
+        10,
+        12
+      ],
+      "isolation": [
+        12,
+        15
+      ],
+      "restCompound": 90,
+      "restAccessory": 75,
+      "restIsolation": 60,
+      "sets": 3,
+      "label": "General fitness: balanced strength with moderate volume"
+    }
+  },
+  "beginnerStrengthReps": [
+    5,
+    8
+  ],
+  "rpe": {
+    "beginner": 6.5,
+    "intermediate": 7.5,
+    "advanced": 8.5
+  },
+  "cautiousRpeCap": 6,
+  "weeklySetsPerMuscle": {
+    "beginner": [
+      6,
+      12
+    ],
+    "intermediate": [
+      10,
+      20
+    ],
+    "advanced": [
+      12,
+      22
+    ]
+  },
+  "splits": {
+    "1": {
+      "name": "Full body",
+      "sessions": [
+        "FB_A"
+      ]
+    },
+    "2": {
+      "name": "Full body (A/B)",
+      "sessions": [
+        "FB_A",
+        "FB_B"
+      ]
+    },
+    "3": {
+      "name": "Full body (A/B/C)",
+      "sessions": [
+        "FB_A",
+        "FB_B",
+        "FB_C"
+      ]
+    },
+    "4": {
+      "name": "Upper / lower",
+      "sessions": [
+        "UPPER_A",
+        "LOWER_A",
+        "UPPER_B",
+        "LOWER_B"
+      ]
+    },
+    "5": {
+      "name": "Push / pull / legs + upper / lower",
+      "sessions": [
+        "PUSH",
+        "PULL",
+        "LEGS",
+        "UPPER_A",
+        "LOWER_A"
+      ]
+    },
+    "6": {
+      "name": "Push / pull / legs ×2",
+      "sessions": [
+        "PUSH",
+        "PULL",
+        "LEGS",
+        "PUSH_B",
+        "PULL_B",
+        "LEGS_B"
+      ]
+    },
+    "7": {
+      "name": "Push / pull / legs ×2 + mobility",
+      "sessions": [
+        "PUSH",
+        "PULL",
+        "LEGS",
+        "PUSH_B",
+        "PULL_B",
+        "LEGS_B",
+        "MOBILITY"
+      ]
+    }
+  },
+  "dayLayouts": {
+    "1": [
+      "wed"
+    ],
+    "2": [
+      "tue",
+      "fri"
+    ],
+    "3": [
+      "mon",
+      "wed",
+      "fri"
+    ],
+    "4": [
+      "mon",
+      "tue",
+      "thu",
+      "fri"
+    ],
+    "5": [
+      "mon",
+      "tue",
+      "wed",
+      "fri",
+      "sat"
+    ],
+    "6": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat"
+    ],
+    "7": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat",
+      "sun"
+    ]
+  },
+  "_slots": "role: compound | accessory | isolation | core | carry. muscles narrows isolation picks; priority 1 = never dropped for time.",
+  "templates": {
+    "FB_A": {
+      "name": "Full body A",
+      "focus": "Squat, horizontal push and pull",
+      "slots": [
+        {
+          "pattern": "squat",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "shoulders"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 2
+        }
+      ]
+    },
+    "FB_B": {
+      "name": "Full body B",
+      "focus": "Hinge, vertical push and pull",
+      "slots": [
+        {
+          "pattern": "hinge",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "lunge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "biceps",
+            "triceps"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "carry",
+          "role": "carry",
+          "priority": 3
+        }
+      ]
+    },
+    "FB_C": {
+      "name": "Full body C",
+      "focus": "Single-leg work, pressing and rows",
+      "slots": [
+        {
+          "pattern": "lunge",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-h",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-h",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "hamstrings",
+            "calves",
+            "glutes"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 2
+        }
+      ]
+    },
+    "UPPER_A": {
+      "name": "Upper A",
+      "focus": "Horizontal pressing and rowing",
+      "slots": [
+        {
+          "pattern": "push-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-v",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "pull-v",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "biceps"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "triceps"
+          ],
+          "priority": 3
+        }
+      ]
+    },
+    "LOWER_A": {
+      "name": "Lower A",
+      "focus": "Squat-led lower body",
+      "slots": [
+        {
+          "pattern": "squat",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "lunge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "hamstrings",
+            "calves"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 2
+        }
+      ]
+    },
+    "UPPER_B": {
+      "name": "Upper B",
+      "focus": "Vertical pressing and pulling",
+      "slots": [
+        {
+          "pattern": "push-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-h",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "pull-h",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "shoulders"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 3
+        }
+      ]
+    },
+    "LOWER_B": {
+      "name": "Lower B",
+      "focus": "Hinge-led lower body",
+      "slots": [
+        {
+          "pattern": "hinge",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "squat",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "lunge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "glutes",
+            "calves",
+            "quadriceps"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "carry",
+          "role": "carry",
+          "priority": 3
+        }
+      ]
+    },
+    "PUSH": {
+      "name": "Push",
+      "focus": "Chest, shoulders, triceps",
+      "slots": [
+        {
+          "pattern": "push-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-h",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "shoulders"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "triceps"
+          ],
+          "priority": 3
+        }
+      ]
+    },
+    "PULL": {
+      "name": "Pull",
+      "focus": "Back and biceps",
+      "slots": [
+        {
+          "pattern": "pull-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-h",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "biceps"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 3
+        }
+      ]
+    },
+    "LEGS": {
+      "name": "Legs",
+      "focus": "Quads, hamstrings, glutes",
+      "slots": [
+        {
+          "pattern": "squat",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "lunge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "hamstrings",
+            "calves"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 3
+        }
+      ]
+    },
+    "PUSH_B": {
+      "name": "Push B",
+      "focus": "Shoulder-led pressing",
+      "slots": [
+        {
+          "pattern": "push-v",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "push-h",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "chest"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "triceps"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 3
+        }
+      ]
+    },
+    "PULL_B": {
+      "name": "Pull B",
+      "focus": "Row-led pulling",
+      "slots": [
+        {
+          "pattern": "pull-h",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "pull-v",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "biceps",
+            "forearms"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "carry",
+          "role": "carry",
+          "priority": 3
+        }
+      ]
+    },
+    "LEGS_B": {
+      "name": "Legs B",
+      "focus": "Single-leg and posterior chain",
+      "slots": [
+        {
+          "pattern": "lunge",
+          "role": "compound",
+          "priority": 1
+        },
+        {
+          "pattern": "hinge",
+          "role": "accessory",
+          "priority": 1
+        },
+        {
+          "pattern": "squat",
+          "role": "accessory",
+          "priority": 2
+        },
+        {
+          "pattern": "isolation",
+          "role": "isolation",
+          "muscles": [
+            "glutes",
+            "adductors",
+            "abductors"
+          ],
+          "priority": 3
+        },
+        {
+          "pattern": "core",
+          "role": "core",
+          "priority": 3
+        }
+      ]
+    },
+    "MOBILITY": {
+      "name": "Mobility & recovery",
+      "focus": "Easy movement and stretching",
+      "mobilityOnly": true,
+      "slots": []
+    }
+  },
+  "timing": {
+    "warmupMin": 5,
+    "cooldownMin": 3,
+    "transitionSec": 45,
+    "workSec": {
+      "compound": 40,
+      "accessory": 35,
+      "isolation": 30,
+      "core": 35,
+      "carry": 45
+    },
+    "finisherMin": 8,
+    "mobilitySessionMin": 25,
+    "maxSets": {
+      "compound": 5,
+      "accessory": 4,
+      "isolation": 4,
+      "core": 3,
+      "carry": 3
+    }
+  },
+  "periodization": {
+    "_comment": "Weeks cycle through accumulation (volume up), intensification (reps down, effort up) and a deload every 4th week (fewer sets, lower effort). setsDelta applies to the main lifts (priority-1 slots); repShift moves the rep range down by that many reps.",
+    "blockLength": 4,
+    "pattern": [
+      {
+        "phase": "accumulation",
+        "setsDelta": 0,
+        "rpeDelta": -0.5,
+        "repShift": 0,
+        "note": "Learn the movements; leave a couple of reps in the tank."
+      },
+      {
+        "phase": "accumulation",
+        "setsDelta": 1,
+        "rpeDelta": 0,
+        "repShift": 0,
+        "note": "One more set on the main lifts."
+      },
+      {
+        "phase": "intensification",
+        "setsDelta": 1,
+        "rpeDelta": 0.5,
+        "repShift": 2,
+        "note": "Heavier: rep ranges drop, effort goes up."
+      },
+      {
+        "phase": "deload",
+        "setsDelta": -1,
+        "rpeDelta": -1.5,
+        "repShift": 0,
+        "note": "Deload: fewer sets and easier effort so you recover and come back stronger."
+      }
+    ]
+  },
+  "bodyTypeModulation": {
+    "endomorph": {
+      "cut": {
+        "finisher": true,
+        "steps": 10000,
+        "note": "Extra conditioning finisher and a higher step target help the calorie deficit."
+      },
+      "default": {
+        "finisher": true,
+        "steps": 9000
+      }
+    },
+    "ectomorph": {
+      "bulk": {
+        "finisher": false,
+        "extraSetOnMain": true,
+        "steps": 6000,
+        "note": "Minimal conditioning and an extra set on the big lifts, so energy goes into growth."
+      },
+      "lean-bulk": {
+        "finisher": false,
+        "extraSetOnMain": true,
+        "steps": 7000
+      },
+      "default": {
+        "finisher": false,
+        "steps": 7500
+      }
+    },
+    "mesomorph": {
+      "default": {
+        "finisher": false,
+        "steps": 8000
+      }
+    },
+    "unknown": {
+      "cut": {
+        "finisher": true,
+        "steps": 9000
+      },
+      "default": {
+        "finisher": false,
+        "steps": 8000
+      }
+    }
+  },
+  "met": {
+    "_source": "2024 Adult Compendium of Physical Activities: resistance training, moderate effort (code 02054, 5.0 MET); circuit training with minimal rest (02040, 8.0 MET); stretching/yoga-like (02101, 2.3 MET).",
+    "resistance": 5,
+    "circuit": 8,
+    "mobility": 2.3
+  },
+  "levels": {
+    "beginner": [
+      "beginner"
+    ],
+    "intermediate": [
+      "beginner",
+      "intermediate"
+    ],
+    "advanced": [
+      "beginner",
+      "intermediate",
+      "expert"
+    ]
+  },
+  "staples": {
+    "_comment": "Well-known, easy-to-coach exercises get a selection bonus so plans read like a coach wrote them.",
+    "bonus": 4,
+    "patterns": {
+      "squat": "^(goblet squat|dumbbell squat|barbell (full )?squat|front barbell squat|barbell front squat|leg press|bodyweight squat|smith machine squat|kettlebell goblet squat)",
+      "hinge": "^(romanian deadlift|stiff[- ]legged (dumbbell|barbell) deadlift|barbell deadlift|barbell hip thrust|glute bridge|butt lift|one-arm kettlebell swings|kettlebell swing|good ?morning|single[- ]leg deadlift|dumbbell romanian)",
+      "push-h": "^(push-?ups?|pushups|barbell bench press|dumbbell bench press|incline dumbbell press|incline push-?up|dips - chest|machine bench press|leverage chest press|chest press)",
+      "push-v": "^(dumbbell shoulder press|seated dumbbell press|standing dumbbell press|barbell shoulder press|military press|standing military press|arnold dumbbell press|pike|machine shoulder)",
+      "pull-h": "^(bent over barbell row|bent over two-dumbbell row$|one-arm dumbbell row|seated cable rows?|inverted row|t-bar row|chest[- ]supported|lying t-bar|dumbbell incline row)",
+      "pull-v": "^(pull-?ups?|pullups|chin-?ups?|wide-grip lat pulldown|close-grip front lat pulldown|full range-of-motion lat pulldown|band assisted pull-up)",
+      "lunge": "^(dumbbell lunges|barbell lunge|bodyweight walking lunge|barbell walking lunge|split squats?|dumbbell step ups|barbell step ups|bodyweight lunge|reverse lunge|dumbbell rear lunge)",
+      "core": "^(plank|dead bug|bird dog|pallof press|hanging leg raise|ab roller|side bridge|crunches|mountain climbers|cross-body crunch|russian twist|air bike)",
+      "carry": "farmer",
+      "isolation": "^(side lateral raise|lateral raise|dumbbell bicep curl|hammer curls|dumbbell alternate bicep curl|triceps pushdown|tricep dumbbell kickback|lying leg curls|seated leg curl|leg extensions|standing calf raises|seated calf raise|face pull|reverse flyes|dumbbell flyes|cable crossover)"
+    },
+    "variantPenalty": {
+      "_comment": "Unusual variants lose points on main/supporting slots so the standard lift wins.",
+      "regex": "decline|wide-grip|close-grip|reverse grip|one[- ]arm|single[- ]arm|kneeling|elevated|with (a )?bands?|bosu|exercise ball|on (a )?ball|chains|gorilla|flutter|kickback|leg lift|scissor|speed|jump|clean|snatch",
+      "compound": 3,
+      "accessory": 1
+    },
+    "repeatPenalty": 3
+  },
+  "needsBar": {
+    "_comment": "free-exercise-db labels these 'body only', but they need a pull-up / dip bar. Allowed when the user has a pull-up bar or trains at a gym (machine, cable or barbell).",
+    "names": "pull-?ups?|pullups|chin-?ups?|chinups|hanging|muscle[- ]?up|dips?\b|toes to bar",
+    "equipmentAny": [
+      "pull-up bar",
+      "machine",
+      "cable",
+      "barbell"
+    ]
+  },
+  "needsBench": {
+    "_comment": "Bench work needs a bench: allowed with 'bench' in the user's equipment or gym equipment.",
+    "names": "bench|incline|decline|preacher",
+    "equipmentAny": [
+      "bench",
+      "machine",
+      "cable",
+      "barbell"
+    ]
+  },
+  "restFloors": {
+    "_comment": "Minimum rest (fraction of the scheme's rest) when trimming for time; strength work keeps long rests.",
+    "strength": 0.75,
+    "default": 0.5,
+    "absoluteMinCompound": 60,
+    "absoluteMinOther": 30
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "_comment": "Conservative exercise exclusions per reported limitation (and for a flagged PAR-Q+ screen). A rule can exclude whole movement patterns, exercise categories, or names matching a regex, and can cap effort. These are general precautions, not medical advice: every plan with a limitation also tells the user to follow their clinician's guidance.",
+  "rules": {
+    "knee": {
+      "patterns": [
+        "lunge"
+      ],
+      "categories": [
+        "plyometrics"
+      ],
+      "names": "jump|pistol|burpee|sprint|box jump|sissy|deep squat|full squat",
+      "label": "knee"
+    },
+    "lower_back": {
+      "names": "deadlift|good ?morning|bent[- ]?over|clean|snatch|jefferson|sit-?up|russian twist|hyperextension|back extension|superman|t-bar|pendlay|jerk|stiff[- ]legged",
+      "categories": [
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "label": "lower back"
+    },
+    "shoulder": {
+      "patterns": [
+        "push-v"
+      ],
+      "names": "overhead|military|behind[- ]the[- ]neck|upright row|dips?\\b|snatch|jerk|handstand|pullover|kipping",
+      "label": "shoulder"
+    },
+    "wrist_elbow": {
+      "names": "push-?ups?|skull ?crusher|front squat|clean|snatch|handstand|plank|close[- ]grip bench|french press|kettlebell",
+      "label": "wrist/elbow"
+    },
+    "hip": {
+      "patterns": [
+        "lunge"
+      ],
+      "names": "sumo|pistol|jump|deep squat|full squat|adductor stretch",
+      "label": "hip"
+    },
+    "ankle_foot": {
+      "categories": [
+        "plyometrics"
+      ],
+      "names": "run|jog|sprint|jump|skip|rope|hop|bound|calf raise|lunge",
+      "label": "ankle/foot"
+    },
+    "neck": {
+      "names": "shrug|neck|behind[- ]the[- ]neck|headstand|wrestler|bridge on",
+      "label": "neck"
+    },
+    "high_blood_pressure": {
+      "categories": [
+        "powerlifting",
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "names": "max|1rm|isometric hold",
+      "rpeCap": 7,
+      "label": "blood pressure"
+    },
+    "heart_condition": {
+      "categories": [
+        "powerlifting",
+        "olympic weightlifting",
+        "strongman",
+        "plyometrics"
+      ],
+      "rpeCap": 6,
+      "noFinisher": true,
+      "label": "heart condition"
+    },
+    "pregnancy": {
+      "categories": [
+        "plyometrics",
+        "powerlifting",
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "names": "crunch|sit-?up|lying|supine|bench press|decline|v-up|leg raise|jump|twist|prone|flutter",
+      "rpeCap": 6,
+      "noFinisher": true,
+      "label": "pregnancy"
+    },
+    "recent_surgery": {
+      "categories": [
+        "plyometrics",
+        "powerlifting",
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "rpeCap": 6,
+      "noFinisher": true,
+      "label": "recent surgery"
+    },
+    "_parq_flagged": {
+      "categories": [
+        "plyometrics",
+        "powerlifting",
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "rpeCap": 6,
+      "label": "health screen"
+    },
+    "_health_unknown": {
+      "categories": [
+        "plyometrics",
+        "olympic weightlifting",
+        "strongman"
+      ],
+      "rpeCap": 7,
+      "label": "undisclosed health"
+    }
+  },
+  "notices": {
+    "_parq_flagged": "Your health check flagged at least one item. This plan keeps effort moderate (RPE ≤ 6) and leaves out explosive and maximal lifting. Please get clearance from a doctor or physiotherapist before you start.",
+    "pregnancy": "Pregnancy: exercises lying on your back, twisting and jumping are left out. Follow your obstetrician's or midwife's advice, and stop if anything feels wrong.",
+    "heart_condition": "Heart condition: effort is capped and conditioning finishers are off. Only train with your cardiologist's approval.",
+    "recent_surgery": "Recent surgery: effort is capped. Follow your surgeon's or physiotherapist's return-to-training plan.",
+    "default": "Exercises that commonly aggravate {labels} are left out. If anything hurts, stop and substitute; pain is a signal, not a challenge.",
+    "_health_unknown": "You haven't shared health information, so this plan stays moderate (RPE ≤ 7, no explosive or maximal lifting). If you have any medical condition, check with a doctor before starting."
+  }
+}

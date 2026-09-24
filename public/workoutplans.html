@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout Plans</title>
-    <link rel="icon" type="image/png" href="webicon1.png">
-    <link rel="stylesheet" href="workoutplans.css">
-    <link rel="stylesheet" href="css/trainsync-ext.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout plans · TrainSync</title>
+  <meta name="description" content="A periodised workout plan built around your goal, experience, equipment, schedule and injuries, with the reasoning shown for every choice.">
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/onboarding.css">
+  <link rel="stylesheet" href="/css/plans.css">
 </head>
-<body>
-    <video autoplay muted loop id="bg-video">
-        <source src="backgroundhome.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="title" id="trainsynctitle"><h1>TrainSync</h1></div>
-    <form id="WorkoutsearchForm">
-        <div class="SearchGym" id="searchBox">
-            <h4>Personalised Workout Plan</h4>
-            <label for="currentType">Current Body Type</label>
-            <input type="text" id="currentType" name="currentType" placeholder="ectomorph || mesomorph || endomorph" required list="bodytype-options" autocomplete="off"><datalist id="bodytype-options"><option value="ectomorph"><option value="mesomorph"><option value="endomorph"></datalist><br>
-            <label for="goalType">Goal</label>
-            <input type="text" id="goalType" name="goalType" placeholder="cut || bulk || lean bulk || maintainance" list="goal-options" autocomplete="off"><datalist id="goal-options"><option value="cut"><option value="bulk"><option value="lean bulk"><option value="maintenance"></datalist><br><br>
-            <button type="Search">Search</button>
-            <p id="errorMessage" style="color: red;"></p>
-            <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
-        </div>
-        <div id="dietResults" class="diet-results"></div>
-    </form>
+<body data-page="workoutplans">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="p-page">
+    <div class="ts-container ts-container--wide">
+      <header class="p-head">
+        <p class="ts-eyebrow">Workout plans</p>
+        <h1 class="ts-h2" data-p-title>Training built around you</h1>
+        <p class="p-head__sub" data-p-sub>Periodised plans from 870+ exercises, fitted to your goal, equipment, time and injuries.</p>
+        <div class="p-chips" data-p-chips></div>
+        <div class="p-actions" data-p-actions></div>
+      </header>
+      <div data-p-root><div class="ts-skeleton p-skel"></div></div>
+    </div>
+  </main>
 
-    <script src="js/common.js"></script>
-    <script src="js/workoutplans.js"></script>
+  <dialog class="ts-sheet" data-p-sheet aria-labelledby="p-sheet-title">
+    <div class="ts-sheet__grip" aria-hidden="true"></div>
+    <button class="ts-icon-btn ts-icon-btn--sm ts-sheet__close" type="button" aria-label="Close" data-p-sheet-close>
+      <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-close"></use></svg>
+    </button>
+    <div class="ts-sheet__body" data-p-sheet-body></div>
+  </dialog>
+
+  <footer data-ts-footer></footer>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/forms.js"></script>
+  <script src="/js/workoutplans.js"></script>
 </body>
 </html>
