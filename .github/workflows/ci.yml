@@ -1,0 +1,126 @@
+# CI: lint, unit + API (Jest, real MySQL), ML (pytest), e2e (Playwright + Edge),
+# visual regression (Windows, where the baselines were captured), dependency audits.
+name: CI
+
+on:
+  push:
+    branches: [main, master, v3]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 22
+  PYTHON_VERSION: '3.11'
+  DB_HOST: 127.0.0.1
+  DB_USER: root
+  DB_PASSWORD: ci-root-pass
+  DB_NAME: trainsync_ci
+  TEST_DB_NAME: trainsync_test
+  SESSION_SECRET: ci-session-secret-ci-session-secret-0123456789
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm ci
+      - run: npx eslint .
+      - uses: actions/setup-python@v5
+        with: { python-version: '${{ env.PYTHON_VERSION }}' }
+      - run: pip install ruff
+      - run: ruff check ml
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm audit --audit-level=high
+      - uses: actions/setup-python@v5
+        with: { python-version: '${{ env.PYTHON_VERSION }}' }
+      - run: pip install pip-audit
+      - run: pip-audit -r ml/requirements.lock
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci-root-pass
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci-root-pass"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm ci
+      - run: npm run migrate
+      - run: npm run migrate   # idempotency check
+      - run: npm test
+
+  ml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '${{ env.PYTHON_VERSION }}', cache: pip, cache-dependency-path: ml/requirements.lock }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm ci
+      - run: pip install -r ml/requirements.lock
+      - name: Cache IPIP-FFM raw data (~150 MB, public release)
+        uses: actions/cache@v4
+        with:
+          path: ml/data/raw/ipip
+          key: ipip-ffm-8nov2018-v1
+      - run: npm run import:ipip
+      - run: python -m pytest ml/tests -q
+
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci-root-pass
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci-root-pass"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm ci
+      # Branded Edge: Playwright's bundled Chromium can't decode H.264 video.
+      - run: npx playwright install --with-deps msedge
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: e2e-report, path: test-results }
+
+  visual:
+    # Baselines are captured on Windows + Edge; font rasterisation differs on Linux.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: '8.4'
+          root-password: ci-root-pass
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ env.NODE_VERSION }}', cache: npm }
+      - run: npm ci
+      - run: npm run test:visual
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: visual-diffs, path: tests/visual/__diff__ }

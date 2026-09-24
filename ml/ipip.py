@@ -74,5 +74,5 @@ def load_scored(refresh: bool = False) -> np.ndarray:
 if __name__ == "__main__":
     b = load_scored(refresh=True)
     print(f"IPIP-FFM: {len(b):,} clean respondents (IPC == 1, all 50 items answered)")
-    print("means", dict(zip(TRAIT_ORDER, np.round(b.mean(0), 3))))
+    print("means", dict(zip(TRAIT_ORDER, np.round(b.mean(0), 3), strict=True)))
     print("corr\n", np.round(np.corrcoef(b.T), 2))

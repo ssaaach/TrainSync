@@ -28,18 +28,42 @@
     return escapeHTML(value).replace(/\\n|\r?\n/g, '<br>');
   }
 
-  // fetch wrapper: JSON in/out, cookies included. Never throws on HTTP errors;
-  // returns { ok, status, data }.
-  async function api(path, { method = 'GET', body, headers } = {}) {
+  // CSRF token for state-changing requests (kept in memory, fetched lazily).
+  let csrfToken = null;
+  async function getCsrfToken(refresh = false) {
+    if (!csrfToken || refresh) {
+      const res = await fetch(`${API_BASE}/api/auth/csrf`, { credentials: 'include' });
+      csrfToken = res.ok ? (await res.json()).csrfToken : null;
+    }
+    return csrfToken;
+  }
+
+  // fetch wrapper: JSON in/out, cookies and CSRF token included. Never throws
+  // on HTTP errors; returns { ok, status, data }. A stale CSRF token (e.g. the
+  // session expired) is refreshed and the request retried once.
+  async function api(path, { method = 'GET', body, headers } = {}, retried = false) {
+    const mutating = !['GET', 'HEAD'].includes(method.toUpperCase());
     const res = await fetch(API_BASE + path, {
       method,
       credentials: 'include',
-      headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...headers },
+      headers: {
+        ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+        ...(mutating ? { 'x-csrf-token': await getCsrfToken() } : {}),
+        ...headers,
+      },
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
     let data = null;
     try { data = await res.json(); } catch { /* empty body */ }
-    return { ok: res.ok, status: res.status, data: data || {} };
+    data = data || {};
+    if (mutating && res.status === 403 && data.code === 'csrf_invalid' && !retried) {
+      await getCsrfToken(true);
+      return api(path, { method, body, headers }, true);
+    }
+    // Login/logout rotate the session, and with it the token.
+    if (data.csrfToken) csrfToken = data.csrfToken;
+    if (/\/api\/auth\/logout$/.test(path)) csrfToken = null;
+    return { ok: res.ok, status: res.status, data };
   }
 
   let sessionPromise = null;

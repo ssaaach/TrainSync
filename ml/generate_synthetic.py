@@ -102,7 +102,7 @@ class Gen:
         logits = CFG["big5"]["beta"] * (self.big5_z[idx] @ direction)
         p = np.exp(logits - logits.max())
         row = self.big5[idx[self.rng.choice(len(idx), p=p / p.sum())]]
-        return {t: round(float(v), 4) for t, v in zip(TRAIT_ORDER, row)}
+        return {t: round(float(v), 4) for t, v in zip(TRAIT_ORDER, row, strict=True)}
 
     def schedule(self, probs: dict) -> dict:
         """7 days × dayparts from the 6 weekday/weekend slot probabilities."""
@@ -129,8 +129,8 @@ class Gen:
 
     def languages(self, city_key: str) -> list[str]:
         city_langs = CITIES[city_key]["languages"]
-        regional = [l for l in city_langs if l not in ("English", "Hindi")]
-        langs = [l for l, p in (("English", 0.85), ("Hindi", 0.7)) if self.rng.random() < p]
+        regional = [lang for lang in city_langs if lang not in ("English", "Hindi")]
+        langs = [lang for lang, p in (("English", 0.85), ("Hindi", 0.7)) if self.rng.random() < p]
         if regional and self.rng.random() < 0.6:
             langs.append(regional[0])
         for extra in regional[1:]:

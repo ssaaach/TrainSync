@@ -12,7 +12,7 @@ function validate(schemas) {
       const result = schemas[part].safeParse(req[part] ?? {});
       if (!result.success) {
         const details = formatIssues(result.error);
-        return res.status(400).json({ error: details[0].message, details });
+        return res.status(400).json({ error: details[0].message, code: 'validation', details, requestId: req.id });
       }
       // Express 5 exposes req.query as a getter, so store parsed values separately.
       req.valid = req.valid || {};

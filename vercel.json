@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 30,
+      "includeFiles": "{config,db/migrations,middleware,routes,services,ml/artifacts}/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/healthz", "destination": "/api/index" },
+    { "source": "/readyz", "destination": "/api/index" },
+    { "source": "/home", "destination": "/api/index" },
+    { "source": "/", "destination": "/homepage.html" }
+  ],
+  "crons": [
+    { "path": "/api/cron/daily", "schedule": "30 3 * * *" }
+  ]
+}

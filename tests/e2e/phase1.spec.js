@@ -1,5 +1,6 @@
 // Phase 1 browser flows: the real pages driving the real API.
 const { test, expect } = require('@playwright/test');
+const { apiPost } = require('../setup/users');
 
 const PASSWORD = 'e2e-password-1';
 const stamp = Date.now();
@@ -79,8 +80,8 @@ for (const role of ['trainee', 'trainer']) {
 test('homepage shows the user menu when logged in, and logout works', async ({ page }) => {
   const errors = trackErrors(page);
   const email = `e2e-home-${stamp}@playwright.trainsync.test`;
-  await page.request.post('/api/auth/register', { data: { email, name: 'Home', role: 'trainee', password: PASSWORD, confirmPassword: PASSWORD } });
-  await page.request.post('/api/auth/login', { data: { email, password: PASSWORD } });
+  await apiPost(page, '/api/auth/register', { email, name: 'Home', role: 'trainee', password: PASSWORD, confirmPassword: PASSWORD });
+  await apiPost(page, '/api/auth/login', { email, password: PASSWORD });
   await page.goto('/homepage.html');
   await expect(page.locator('#user-menu-toggle')).toHaveText(`☰ ${email}`);
   await page.click('#user-menu-toggle');

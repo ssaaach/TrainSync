@@ -112,4 +112,4 @@ async function updateProfile(req, res, next) {
 router.patch('/', requireAuth, validateForRole, updateProfile);
 
 module.exports = router;
-module.exports.legacyUpdate = [requireAuth, validateForRole, updateProfile];
+
