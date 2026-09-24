@@ -66,4 +66,14 @@ function homeGymFor(gymsByCity, p, radiusKm) {
   return hit ? hit.item.gym_id : null;
 }
 
-module.exports = { TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor };
+// Synthetic/demo people were generated with every category filled in, so
+// they're recorded as consenting to every purpose (source 'synthetic').
+const PURPOSES = ['body_metrics', 'health', 'personality', 'interests', 'location', 'matching'];
+async function grantAllConsents(conn, userIds, policyVersion) {
+  for (let i = 0; i < userIds.length; i += 1000) {
+    const rows = userIds.slice(i, i + 1000).flatMap(id => PURPOSES.map(p => [id, p, 1, policyVersion, 'synthetic']));
+    await conn.query('INSERT INTO consent_ledger (user_id, purpose, granted, policy_version, source) VALUES ?', [rows]);
+  }
+}
+
+module.exports = { grantAllConsents, TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor };

@@ -3,7 +3,7 @@
 // is_synthetic=1 (purge:synthetic removes them; `npm run seed` recreates them).
 const bcrypt = require('bcrypt');
 const config = require('../../config');
-const { TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor } = require('./profiles');
+const { grantAllConsents, TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor } = require('./profiles');
 
 const INDIRANAGAR = { city: 'Bengaluru', locality: 'Indiranagar', lat: 12.973291, lng: 77.640467 };
 const MORNINGS = { mon: ['morning'], tue: ['morning'], wed: ['morning'], thu: ['morning'], fri: ['morning'], sat: ['morning'] };
@@ -64,6 +64,10 @@ async function seedDemoAccounts(conn) {
   const trainerId = await upsertUser(conn, emails.trainer, DEMO_TRAINER.name, 'trainer', hash);
   const homeGym = homeGymFor(await loadGymsByCity(conn), DEMO_TRAINER, config.seed.homeGymRadiusKm);
   await conn.query(upsertSql('trainers', TRAINER_COLUMNS), trainerRow(trainerId, DEMO_TRAINER, homeGym));
+
+  // Demo accounts consent to everything; replace any earlier decisions.
+  await conn.query('DELETE FROM consent_ledger WHERE user_id IN (?)', [[traineeId, trainerId]]);
+  await grantAllConsents(conn, [traineeId, trainerId], config.consent.policyVersion);
 
   return { trainee: emails.trainee, trainer: emails.trainer, bodyType: body.outputs.label, homeGym };
 }

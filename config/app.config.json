@@ -262,5 +262,8 @@
       "maintenance": 0.9
     },
     "kcalPerKgFat": 7700
+  },
+  "consent": {
+    "policyVersion": "2026-09-24"
   }
 }

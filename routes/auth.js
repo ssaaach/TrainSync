@@ -43,7 +43,7 @@ let dummyHash;
 const getDummyHash = () => (dummyHash ??= bcrypt.hash('timing-equaliser', A.bcryptRounds));
 
 function sessionUser(row) {
-  return { user_id: row.user_id, email: row.email, role: row.role, name: row.name };
+  return { user_id: row.user_id, email: row.email, role: row.role, name: row.name, onboardingComplete: row.onboarding_complete === 1 };
 }
 
 // Starts a fresh session (new id: prevents fixation) for this user.
@@ -67,15 +67,18 @@ router.post('/register', ipLimiter, validate({ body: registerSchema }), async (r
   const { email: userEmail, name, role, password } = req.valid.body;
   try {
     const hashed = await bcrypt.hash(password, A.bcryptRounds);
-    await db.withTransaction(async conn => {
+    const userId = await db.withTransaction(async conn => {
       const [result] = await conn.execute(
         'INSERT INTO users (email, name, role, password) VALUES (?, ?, ?, ?)',
         [userEmail, name, role, hashed]
       );
       const table = role === 'trainer' ? 'trainers' : 'trainees';
       await conn.execute(`INSERT INTO ${table} (user_id) VALUES (?)`, [result.insertId]);
+      return result.insertId;
     });
-    res.status(201).json({ message: 'User registered successfully' });
+    // Signed straight in; onboarding (consent first) comes next.
+    const csrfToken = await establishSession(req, { user_id: userId, email: userEmail, role, name, onboarding_complete: 0 });
+    res.status(201).json({ message: 'User registered successfully', csrfToken, next: '/onboarding.html' });
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ error: 'Email already registered', code: 'email_taken' });
     next(err);
@@ -86,7 +89,7 @@ router.post('/login', validate({ body: loginSchema }), loginThrottle, async (req
   const { email: userEmail, password } = req.valid.body;
   try {
     const [rows] = await db.execute(
-      'SELECT user_id, email, name, role, password FROM users WHERE email = ?', [userEmail]
+      'SELECT user_id, email, name, role, password, onboarding_complete FROM users WHERE email = ?', [userEmail]
     );
     const user = rows[0];
     const ok = await bcrypt.compare(password, user ? user.password : await getDummyHash());

@@ -14,7 +14,7 @@ const db = require('../../config/db');
 const config = require('../../config');
 const { runPython } = require('../py');
 const { parseArgs } = require('../import/lib');
-const { TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor } = require('./profiles');
+const { grantAllConsents, TRAINEE_COLUMNS, TRAINER_COLUMNS, bodyAssessment, traineeRow, trainerRow, loadGymsByCity, homeGymFor } = require('./profiles');
 const { purgeSyntheticUsers } = require('./purge');
 const { printCounts } = require('./counts');
 
@@ -104,6 +104,7 @@ async function main() {
       await conn.query(`INSERT INTO trainers (${TRAINER_COLUMNS.join(', ')}) VALUES ?`, [rows]);
       await conn.query('INSERT INTO synthetic_profiles (user_id, archetype, latent, generator_version) VALUES ?', [hidden]);
     }
+    await grantAllConsents(conn, [...traineeIds.values(), ...trainerIds.values()], config.consent.policyVersion);
     await conn.commit();
 
     console.log(`✔ synthetic: ${trainees.length} trainees, ${trainers.length} trainers (${meta.generator_version}, seed ${meta.seed}) in ${((Date.now() - t0) / 1000).toFixed(1)}s`);

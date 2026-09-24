@@ -1,6 +1,6 @@
 // Phase 1 browser flows: the real pages driving the real API.
 const { test, expect } = require('@playwright/test');
-const { apiPost } = require('../setup/users');
+const { apiPost, completeOnboarding } = require('../setup/users');
 
 const PASSWORD = 'e2e-password-1';
 const stamp = Date.now();
@@ -25,7 +25,12 @@ for (const role of ['trainee', 'trainer']) {
     await page.fill('#password', PASSWORD);
     await page.fill('#confirmPassword', PASSWORD);
     await page.click('button[type=submit]');
-    await page.waitForURL('**/login.html?registered=1');
+    // Registration signs you in and starts onboarding (covered in
+    // onboarding.spec.js); finish it through the API, then log in again.
+    await page.waitForURL('**/onboarding.html**');
+    await completeOnboarding(page, role);
+    await apiPost(page, '/api/auth/logout', {});
+    await page.goto('/login.html');
 
     await page.fill('#email', email);
     await page.fill('#password', PASSWORD);
@@ -81,7 +86,6 @@ test('homepage shows the user menu when logged in, and logout works', async ({ p
   const errors = trackErrors(page);
   const email = `e2e-home-${stamp}@playwright.trainsync.test`;
   await apiPost(page, '/api/auth/register', { email, name: 'Home', role: 'trainee', password: PASSWORD, confirmPassword: PASSWORD });
-  await apiPost(page, '/api/auth/login', { email, password: PASSWORD });
   await page.goto('/homepage.html');
   const menuButton = page.locator('[data-ts-usermenu]');
   await expect(menuButton).toContainText('Home');

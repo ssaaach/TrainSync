@@ -1,4 +1,4 @@
-// Shared behaviour for the login / registration / profile forms.
+// Shared form behaviour: password toggles, error/success lines, busy state.
 (function () {
   const TS = window.TS;
 

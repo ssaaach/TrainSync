@@ -16,7 +16,9 @@ async function purgeSyntheticUsers(conn, { onlyDomain } = {}) {
       onlyDomain ? [`%@${onlyDomain}`] : []
     );
     if (!rows.length) return total;
-    const [res] = await conn.query('DELETE FROM users WHERE user_id IN (?)', [rows.map(r => r.user_id)]);
+    const ids = rows.map(r => r.user_id);
+    await conn.query('DELETE FROM consent_ledger WHERE user_id IN (?)', [ids]);
+    const [res] = await conn.query('DELETE FROM users WHERE user_id IN (?)', [ids]);
     total += res.affectedRows;
   }
 }

@@ -2,6 +2,45 @@
 
 v3 is built in phases (see `docs/PLAN.md`). Each entry lists what changed, how to check it, and the gates that passed.
 
+## v3 Phase C: consent, onboarding and data rights (2026-09-24)
+
+**Consent** (`services/consent.js`, migrations 005–006)
+- `consent_ledger` is append-only: user, purpose, granted, policy version, source, timestamp. Six purposes: `body_metrics`, `health`, `personality`, `interests`, `location`, `matching`. The current state is the latest row per purpose, and no row means not granted. The ledger has no foreign key, so a minimal withdrawal record survives account deletion.
+- **Withdrawing a purpose erases its data in the same transaction** (DPDP s.8(7)):
+  - body metrics: the measurements, the body type, and all `body_assessments` and `progress_logs` rows
+  - health: limitations and `health_screens`
+  - personality: Big Five scores and cluster
+  - interests: hobbies and interests
+  - location: coordinates and locality (the city stays)
+- `requireConsent(purpose)` guards routes, and onboarding steps whose purpose is declined are refused (`consent_required`) and skipped in the UI.
+- Synthetic and demo users are recorded as consenting to everything (they were generated with every category filled). Real users who finished the old flow are sent through the new consent-first onboarding. The seeders and `purge:synthetic` maintain these rows.
+
+**Onboarding** (`/api/onboarding`, `public/onboarding.html`)
+- **Account creation:** registering signs you in and goes straight to onboarding. Login and the dashboard send unfinished users back to it.
+- **Trainee steps:**
+  - consent
+  - about you (**18+ only**: DPDP requires verifiable parental consent for minors)
+  - body measurements with a **live estimate** (BF%, BMI, FFMI, body type, TDEE, confidence)
+  - goals and training
+  - **PAR-Q+ health screen** (any "yes" flags the profile conservative) with injuries/limitations
+  - Mini-IPIP one statement at a time (`services/personality.js`)
+  - interests, coaching style (4 axes), schedule grid and budget
+- **Trainer steps:** consent, about you, coaching profile (specialisations, certifications, price, capacity, bio, **home gym picker** from OSM gyms), coaching style, personality, interests, schedule and area.
+- **Behaviour:** every step saves on Continue and the wizard resumes where the user left off. Locality and coordinates are stored only with location consent (a picked neighbourhood uses its public OSM centroid; "use my location" is rounded to about 10 m).
+- New public endpoint `/api/localities`.
+
+**Data rights** (`/api/me`)
+- `GET` / `PUT /consent`: view and change consent (a change writes a ledger row and erases on withdrawal).
+- `GET /export`: everything held about the user as a JSON download (never the password hash).
+- `DELETE /`: password plus typed "DELETE". It hard-deletes the account, and everything else cascades; only minimal withdrawal rows stay in the ledger.
+
+**Privacy policy:** now states the 18+ rule.
+
+**Gates**
+- Jest 123/123 (18 new consent and onboarding tests: gating, erasure per purpose, no-op consent writes, export, deletion, trainer path).
+- e2e 32/32, including the full trainee journey through the UI with axe checks on each step, the trainer journey with declined purposes skipped and resume, forced redirects for unfinished users, export and deletion.
+- Visual 30/30, contrast 8/8, lint clean.
+
 ## v3 Phase B: design system and landing page (2026-09-24)
 
 **Design system**

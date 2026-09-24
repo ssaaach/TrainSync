@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" class="ts-no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set up your profile · TrainSync</title>
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/onboarding.css">
+</head>
+<body data-page="onboarding">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="o-page">
+    <section class="o-card ts-glass ts-glass--strong">
+      <div class="o-progress">
+        <div class="o-progress__meta"><span data-o-count>Loading…</span><span data-o-title></span></div>
+        <div class="ts-progress" aria-hidden="true"><span data-o-bar></span></div>
+      </div>
+      <form class="o-form" data-o-form novalidate>
+        <div data-o-body class="o-body"><div class="ts-skeleton o-skel"></div></div>
+        <p class="ts-form-error" id="errorMessage" role="alert"></p>
+        <div class="o-actions">
+          <button class="ts-btn ts-btn--ghost" type="button" data-o-back>Back</button>
+          <span class="o-actions__spacer"></span>
+          <button class="ts-btn ts-btn--dark" type="button" data-o-skip hidden>Skip for now</button>
+          <button class="ts-btn ts-btn--gold" type="submit" data-o-next>Continue</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/forms.js"></script>
+  <script src="/js/onboarding.js"></script>
+</body>
+</html>

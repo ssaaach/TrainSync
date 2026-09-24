@@ -2,7 +2,11 @@
 TS.hideNavbarOnScroll();
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await TS.requireLogin();
+  const session = await TS.requireLogin();
+  if (session.onboardingComplete === false) {
+    location.replace('/onboarding.html');
+    return;
+  }
 
   const sidebar = document.getElementById('sidebar');
 
