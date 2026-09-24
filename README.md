@@ -9,14 +9,36 @@ MySQL, static HTML/CSS/JS in `public/`.
 ## Setup (Windows)
 
 Prerequisites: Node.js 20+, MySQL 8+ (`mysql` / `mysqldump` on `PATH`, or use
-the full path `"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe"`).
+the full path `"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe"`),
+and Python 3.11 for the data pipeline.
 
 ```powershell
 npm install
-Copy-Item .env.example .env   # then fill in DB_PASSWORD and SESSION_SECRET
-npm run migrate               # safe to run repeatedly
-npm run dev                   # http://localhost:5000
+Copy-Item .env.example .env        # fill in DB_PASSWORD, SESSION_SECRET, DEMO_PASSWORD
+py -3.11 -m venv ml/.venv
+ml\.venv\Scripts\python -m pip install -r ml/requirements.txt
+
+npm run migrate                    # safe to run repeatedly
+npm run import:all                 # exercises, OSM gyms (6 cities), USDA foods, IPIP-FFM (downloads are cached)
+npm run seed                       # localities, dishes, demo accounts
+npm run seed:synthetic             # 10,000 trainees + 1,200 trainers (is_synthetic = 1)
+npm run dev                        # http://localhost:5000
 ```
+
+`npm run purge:synthetic` removes every synthetic row (demo accounts too; `npm run seed`
+re-creates them). Real and imported rows are never touched.
+
+### Demo accounts
+
+| Role | Email | Password |
+|---|---|---|
+| Trainee | `trainee@demo.trainsync.test` | `DEMO_PASSWORD` from `.env` |
+| Trainer | `trainer@demo.trainsync.test` | `DEMO_PASSWORD` from `.env` |
+
+Both have complete profiles in Indiranagar, Bengaluru.
+
+Data sources and licences: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md). Synthetic-data design:
+[ml/README.md](ml/README.md).
 
 ### Back up the database first
 
@@ -36,6 +58,9 @@ To restore from PowerShell: `cmd /c "mysql -u root -p trainsync < backups\pre-v2
 |---|---|
 | `npm start` / `npm run dev` | Start the server (dev restarts on change via nodemon) |
 | `npm run migrate` | Apply pending migrations in `db/migrations/` (tracked in `schema_migrations`) |
+| `npm run import:exercises` / `import:gyms` / `import:foods` / `import:ipip` / `import:localities` | Import one dataset (`import:all` runs the first four) |
+| `npm run seed` / `seed:synthetic` / `purge:synthetic` | Reference data + demo accounts / synthetic population / remove synthetic rows |
+| `npm run test:ml` | pytest for `ml/` |
 | `npm test` | Jest + Supertest API tests against the disposable `trainsync_test` DB |
 | `npm run test:e2e` | Playwright end-to-end tests (own server on :5055, `trainsync_test` DB) |
 | `npm run test:visual` | Visual-regression gate against `tests/visual/baseline/*.png` |
@@ -55,11 +80,15 @@ db/migrations/       numbered, idempotent migrations
 scripts/migrate.js   migration runner
 middleware/          requireAuth / requireRole, zod validate()
 routes/              auth, profile, workouts, diets, gyms
-services/            normalize.js (free-text → enum values)
+services/            normalize, bodyComposition (hc-approx-v1), dishNutrition, geo
+scripts/import/      dataset importers (cached downloads in ml/data/raw/)
+scripts/seed/        reference seeds, demo accounts, synthetic loader, purge
+db/seeds/            localities.csv, food_manifest.json, dishes.js
+ml/                  Python: IPIP scoring, synthetic generator (clustering in Phase 5)
 public/js/           common.js (api(), escapeHTML, session) + one file per page
 public/css/          trainsync-ext.css (all v2 styling)
 tests/               api/ (Jest), e2e/ + visual/ (Playwright)
-docs/                UI_OVERRIDES.md
+docs/                UI_OVERRIDES.md, DATA_SOURCES.md
 ```
 
 ## API (so far)

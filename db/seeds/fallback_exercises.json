@@ -1,0 +1,410 @@
+[
+ {
+  "id": "fallback_goblet_squat",
+  "name": "Goblet Squat",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_bodyweight_squat",
+  "name": "Bodyweight Squat",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_barbell_squat",
+  "name": "Barbell Squat",
+  "force": "push",
+  "level": "intermediate",
+  "mechanic": "compound",
+  "equipment": "barbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_romanian_deadlift",
+  "name": "Romanian Deadlift",
+  "force": "pull",
+  "level": "intermediate",
+  "mechanic": "compound",
+  "equipment": "barbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "hamstrings"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_glute_bridge",
+  "name": "Glute Bridge",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "glutes"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_kettlebell_swing",
+  "name": "Kettlebell Swing",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "kettlebells",
+  "category": "strength",
+  "primaryMuscles": [
+   "hamstrings"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_pushup",
+  "name": "Push-Up",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "chest"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_dumbbell_bench",
+  "name": "Dumbbell Bench Press",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "chest"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_barbell_bench",
+  "name": "Barbell Bench Press",
+  "force": "push",
+  "level": "intermediate",
+  "mechanic": "compound",
+  "equipment": "barbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "chest"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_dumbbell_row",
+  "name": "One-Arm Dumbbell Row",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "middle back"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_band_row",
+  "name": "Seated Band Row",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "bands",
+  "category": "strength",
+  "primaryMuscles": [
+   "middle back"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_lat_pulldown",
+  "name": "Lat Pulldown",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "cable",
+  "category": "strength",
+  "primaryMuscles": [
+   "lats"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_pullup",
+  "name": "Pull-Up",
+  "force": "pull",
+  "level": "intermediate",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "lats"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_db_shoulder_press",
+  "name": "Dumbbell Shoulder Press",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "shoulders"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_pike_pushup",
+  "name": "Pike Push-Up",
+  "force": "push",
+  "level": "intermediate",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "shoulders"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_reverse_lunge",
+  "name": "Reverse Lunge",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_db_step_up",
+  "name": "Dumbbell Step-Up",
+  "force": "push",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_farmers_walk",
+  "name": "Farmer's Walk",
+  "force": "static",
+  "level": "beginner",
+  "mechanic": "compound",
+  "equipment": "dumbbell",
+  "category": "strongman",
+  "primaryMuscles": [
+   "forearms"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_plank",
+  "name": "Plank",
+  "force": "static",
+  "level": "beginner",
+  "mechanic": "isolation",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "abdominals"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_dead_bug",
+  "name": "Dead Bug",
+  "force": "static",
+  "level": "beginner",
+  "mechanic": "isolation",
+  "equipment": "body only",
+  "category": "strength",
+  "primaryMuscles": [
+   "abdominals"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_jumping_jacks",
+  "name": "Jumping Jacks",
+  "force": null,
+  "level": "beginner",
+  "mechanic": null,
+  "equipment": "body only",
+  "category": "cardio",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_brisk_walk",
+  "name": "Brisk Walking",
+  "force": null,
+  "level": "beginner",
+  "mechanic": null,
+  "equipment": "body only",
+  "category": "cardio",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_db_curl",
+  "name": "Dumbbell Biceps Curl",
+  "force": "pull",
+  "level": "beginner",
+  "mechanic": "isolation",
+  "equipment": "dumbbell",
+  "category": "strength",
+  "primaryMuscles": [
+   "biceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ },
+ {
+  "id": "fallback_hip_flexor_stretch",
+  "name": "Kneeling Hip Flexor Stretch",
+  "force": "static",
+  "level": "beginner",
+  "mechanic": null,
+  "equipment": "body only",
+  "category": "stretching",
+  "primaryMuscles": [
+   "quadriceps"
+  ],
+  "secondaryMuscles": [],
+  "instructions": [
+   "Fallback entry: the real exercise database could not be downloaded. Run npm run import:exercises again when online."
+  ],
+  "images": []
+ }
+]

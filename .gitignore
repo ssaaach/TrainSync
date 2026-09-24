@@ -9,3 +9,4 @@ test-results/
 playwright-report/
 tests/visual/__diff__/
 blob-report/
+ml/data/synthetic/

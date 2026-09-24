@@ -1,0 +1,30 @@
+{
+  "name": "Mini-IPIP",
+  "citation": "Donnellan, M. B., Oswald, F. L., Baird, B. M., & Lucas, R. E. (2006). The Mini-IPIP Scales: Tiny-yet-effective measures of the Big Five factors of personality. Psychological Assessment, 18(2), 192–203.",
+  "license": "Public domain (items from the International Personality Item Pool, https://ipip.ori.org/)",
+  "scale": { "min": 1, "max": 5, "labels": ["Very inaccurate", "Moderately inaccurate", "Neither", "Moderately accurate", "Very accurate"] },
+  "scoring": "Trait score = (mean of its 4 items after reversing keyed items (6 − x) − 1) / 4, giving 0–1.",
+  "traits": { "E": "Extraversion", "A": "Agreeableness", "C": "Conscientiousness", "N": "Neuroticism", "O": "Openness / Intellect" },
+  "items": [
+    { "n": 1,  "text": "Am the life of the party.", "trait": "E", "reverse": false, "ipipFfm": "EXT1" },
+    { "n": 2,  "text": "Sympathize with others' feelings.", "trait": "A", "reverse": false, "ipipFfm": "AGR4" },
+    { "n": 3,  "text": "Get chores done right away.", "trait": "C", "reverse": false, "ipipFfm": "CSN5" },
+    { "n": 4,  "text": "Have frequent mood swings.", "trait": "N", "reverse": false, "ipipFfm": "EST8" },
+    { "n": 5,  "text": "Have a vivid imagination.", "trait": "O", "reverse": false, "ipipFfm": "OPN3" },
+    { "n": 6,  "text": "Don't talk a lot.", "trait": "E", "reverse": true, "ipipFfm": "EXT2" },
+    { "n": 7,  "text": "Am not interested in other people's problems.", "trait": "A", "reverse": true, "ipipFfm": "AGR5" },
+    { "n": 8,  "text": "Often forget to put things back in their proper place.", "trait": "C", "reverse": true, "ipipFfm": "CSN6" },
+    { "n": 9,  "text": "Am relaxed most of the time.", "trait": "N", "reverse": true, "ipipFfm": "EST2" },
+    { "n": 10, "text": "Am not interested in abstract ideas.", "trait": "O", "reverse": true, "ipipFfm": "OPN4" },
+    { "n": 11, "text": "Talk to a lot of different people at parties.", "trait": "E", "reverse": false, "ipipFfm": "EXT7" },
+    { "n": 12, "text": "Feel others' emotions.", "trait": "A", "reverse": false, "ipipFfm": "AGR9" },
+    { "n": 13, "text": "Like order.", "trait": "C", "reverse": false, "ipipFfm": "CSN7" },
+    { "n": 14, "text": "Get upset easily.", "trait": "N", "reverse": false, "ipipFfm": "EST6" },
+    { "n": 15, "text": "Have difficulty understanding abstract ideas.", "trait": "O", "reverse": true, "ipipFfm": "OPN2" },
+    { "n": 16, "text": "Keep in the background.", "trait": "E", "reverse": true, "ipipFfm": "EXT4" },
+    { "n": 17, "text": "Am not really interested in others.", "trait": "A", "reverse": true, "ipipFfm": "AGR7" },
+    { "n": 18, "text": "Make a mess of things.", "trait": "C", "reverse": true, "ipipFfm": "CSN4" },
+    { "n": 19, "text": "Seldom feel blue.", "trait": "N", "reverse": true, "ipipFfm": "EST4" },
+    { "n": 20, "text": "Do not have a good imagination.", "trait": "O", "reverse": true, "ipipFfm": "OPN6" }
+  ]
+}

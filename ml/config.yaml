@@ -1,0 +1,294 @@
+# TrainSync ML configuration. All tunables for the synthetic population
+# (Phase 2) and, later, the clustering model (Phase 5).
+# Documentation of every distribution and its source: ml/README.md.
+
+synthetic:
+  generator_version: synth-v1
+  seed: 20260924
+  n_trainees: 10000
+  n_trainers: 1200
+  email_domain: synthetic.trainsync.test
+  locality_jitter_km: 1.2            # Gaussian sigma around the locality centroid
+  noise_rate: [0.25, 0.35]           # per person; each attribute block is resampled from another archetype with this probability
+  big5:
+    candidates: 25                   # IPIP-FFM rows drawn per person
+    beta: 1.5                        # softmax sharpness of the archetype tilt (0 = uniform empirical sampling)
+  trainer:
+    max_clients: [8, 25]
+    price_inr_clip: [300, 2500]
+    rating_beta: [8, 2]              # Beta(a, b) scaled to 1–5
+    rating_count_lambda: 30          # Poisson
+    home_gym_radius_km: 3
+  diet_pref: {non-veg: 0.45, veg: 0.38, eggetarian: 0.10, jain: 0.04, vegan: 0.03}
+  allergen_rates: {dairy: 0.05, shellfish: 0.03, gluten: 0.02, peanuts: 0.02, tree_nuts: 0.02, egg: 0.01, soy: 0.01, fish: 0.01, sesame: 0.005, mustard: 0.005}
+  trainer_gender_pref: {female_prefers_female: 0.12, male_prefers_male: 0.03}
+  search_radius_km: [4, 12]
+  travel_radius_km: [3, 10]
+
+  # Body measurements for urban Indian adults aged 18–55 (see ml/README.md).
+  body:
+    male:
+      height_cm: [168.0, 6.8]        # mean, sd
+      bmi_median: 23.3
+      bmi_log_sd: 0.15
+      waist: [27.0, 2.40, 3.2]       # waist = a + b·BMI + N(0, sd)
+      neck: [23.0, 0.57, 1.0]
+      hip: [55.0, 1.70, 3.0]
+      navy_floor: 30                 # waist − neck ≥ 30 cm keeps Navy BF ≳ 6 %
+      wrist: [16.8, 0.9]
+    female:
+      height_cm: [155.5, 6.2]
+      bmi_median: 23.5
+      bmi_log_sd: 0.16
+      waist: [18.0, 2.45, 3.5]
+      neck: [19.5, 0.50, 0.9]
+      hip: [50.0, 1.90, 3.0]
+      navy_floor: 110                # waist + hip − neck ≥ 110 cm keeps Navy BF ≳ 12 %
+      wrist: [15.0, 0.8]
+    bmi_clip: [16.0, 42.0]
+
+  # Planted latent structure. Each archetype is a prior over the blocks that
+  # later become matching features. goals/modality/schedule are independent
+  # Bernoulli probabilities (multi-hot); style = [mean, sd] on a 1–5 scale;
+  # budget/price = [median INR, lognormal sigma]; big5_tilt = direction used to
+  # importance-sample real IPIP-FFM rows (keeps real trait correlations).
+  archetypes:
+    structured_strength_beginner:
+      label: Structured Strength Beginner
+      share: {trainee: 0.16, trainer: 0.15}
+      trainee:
+        goals: {strength: 0.8, beginner-onboarding: 0.8, muscle-gain: 0.35, general-fitness: 0.3}
+        body_goal: {lean-bulk: 0.4, maintenance: 0.3, bulk: 0.2, cut: 0.1}
+        experience: {beginner: 0.75, intermediate: 0.22, advanced: 0.03}
+        style: {structure: [4.5, 0.6], tone: [2.6, 0.8], checkin: [3.8, 0.7], data: [3.8, 0.8]}
+        modality: {in_person_gym: 0.9, home: 0.2, online: 0.15, outdoor: 0.1}
+        schedule: {weekday_morning: 0.3, weekday_afternoon: 0.1, weekday_evening: 0.75, weekend_morning: 0.5, weekend_afternoon: 0.2, weekend_evening: 0.3}
+        budget_inr: [700, 0.35]
+        days_per_week: [3, 4]
+        session_minutes: [45, 60]
+        age: [19, 32]
+        activity: {sedentary: 0.3, light: 0.4, moderate: 0.25, active: 0.05}
+        bmi_shift: 0.0
+        female_share: 0.35
+        big5_tilt: {C: 0.8, O: 0.2}
+      trainer:
+        specializations: {strength: 0.9, beginner-onboarding: 0.85, muscle-gain: 0.5, general-fitness: 0.4}
+        style: {structure: [4.6, 0.5], tone: [2.7, 0.8], checkin: [3.8, 0.7], data: [4.0, 0.7]}
+        best_level: {beginner: 0.7, intermediate: 0.28, advanced: 0.02}
+        modality: {in_person_gym: 0.95, home: 0.3, online: 0.25, outdoor: 0.1}
+        schedule: {weekday_morning: 0.6, weekday_afternoon: 0.3, weekday_evening: 0.8, weekend_morning: 0.7, weekend_afternoon: 0.3, weekend_evening: 0.3}
+        price_inr: [800, 0.30]
+        years: [2, 9]
+        certs: [ACE-CPT, NASM-CPT, K11-CPT, REPs India Level 3, Gold's Gym Fitness Institute]
+        female_share: 0.25
+        big5_tilt: {C: 0.8, A: 0.3}
+
+    competitive_athlete:
+      label: Competitive Athlete
+      share: {trainee: 0.09, trainer: 0.11}
+      trainee:
+        goals: {sport-specific: 0.9, strength: 0.6, endurance: 0.5, muscle-gain: 0.2}
+        body_goal: {lean-bulk: 0.45, maintenance: 0.35, cut: 0.15, bulk: 0.05}
+        experience: {beginner: 0.05, intermediate: 0.4, advanced: 0.55}
+        style: {structure: [4.5, 0.5], tone: [4.4, 0.6], checkin: [4.2, 0.7], data: [4.6, 0.5]}
+        modality: {in_person_gym: 0.8, home: 0.1, online: 0.2, outdoor: 0.7}
+        schedule: {weekday_morning: 0.8, weekday_afternoon: 0.2, weekday_evening: 0.7, weekend_morning: 0.8, weekend_afternoon: 0.3, weekend_evening: 0.2}
+        budget_inr: [1500, 0.35]
+        days_per_week: [5, 6]
+        session_minutes: [60, 90]
+        age: [18, 28]
+        activity: {moderate: 0.2, active: 0.5, very_active: 0.3}
+        bmi_shift: -1.2
+        female_share: 0.3
+        big5_tilt: {E: 0.6, C: 0.6, N: -0.3}
+      trainer:
+        specializations: {sport-specific: 0.95, strength: 0.7, endurance: 0.5, muscle-gain: 0.2}
+        style: {structure: [4.6, 0.4], tone: [4.4, 0.6], checkin: [4.3, 0.6], data: [4.7, 0.4]}
+        best_level: {beginner: 0.02, intermediate: 0.3, advanced: 0.68}
+        modality: {in_person_gym: 0.8, home: 0.05, online: 0.3, outdoor: 0.75}
+        schedule: {weekday_morning: 0.85, weekday_afternoon: 0.3, weekday_evening: 0.7, weekend_morning: 0.85, weekend_afternoon: 0.4, weekend_evening: 0.2}
+        price_inr: [1600, 0.30]
+        years: [5, 15]
+        certs: [NSCA-CSCS, ACSM-CPT, CrossFit Level 1, World Athletics Coach L1]
+        female_share: 0.2
+        big5_tilt: {E: 0.6, C: 0.7}
+
+    busy_professional_fatloss:
+      label: Early-Bird Fat-Loss Professional
+      share: {trainee: 0.19, trainer: 0.15}
+      trainee:
+        goals: {fat-loss: 0.9, general-fitness: 0.5, strength: 0.15}
+        body_goal: {cut: 0.8, maintenance: 0.15, lean-bulk: 0.05}
+        experience: {beginner: 0.55, intermediate: 0.4, advanced: 0.05}
+        style: {structure: [3.9, 0.6], tone: [2.6, 0.8], checkin: [4.5, 0.5], data: [3.6, 0.8]}
+        modality: {in_person_gym: 0.25, home: 0.6, online: 0.9, outdoor: 0.15}
+        schedule: {weekday_morning: 0.9, weekday_afternoon: 0.05, weekday_evening: 0.2, weekend_morning: 0.65, weekend_afternoon: 0.1, weekend_evening: 0.1}
+        budget_inr: [1200, 0.35]
+        days_per_week: [3, 5]
+        session_minutes: [30, 45]
+        age: [27, 42]
+        activity: {sedentary: 0.6, light: 0.3, moderate: 0.1}
+        bmi_shift: 3.0
+        female_share: 0.45
+        big5_tilt: {C: 0.5, N: 0.4}
+      trainer:
+        specializations: {fat-loss: 0.95, general-fitness: 0.6, beginner-onboarding: 0.3}
+        style: {structure: [4.0, 0.6], tone: [2.7, 0.8], checkin: [4.6, 0.5], data: [3.8, 0.7]}
+        best_level: {beginner: 0.55, intermediate: 0.42, advanced: 0.03}
+        modality: {in_person_gym: 0.3, home: 0.55, online: 0.95, outdoor: 0.15}
+        schedule: {weekday_morning: 0.95, weekday_afternoon: 0.2, weekday_evening: 0.35, weekend_morning: 0.75, weekend_afternoon: 0.15, weekend_evening: 0.1}
+        price_inr: [1100, 0.30]
+        years: [3, 10]
+        certs: [ACE-CPT, NASM-CPT, Precision Nutrition L1, ISSA-CPT]
+        female_share: 0.4
+        big5_tilt: {C: 0.6, A: 0.4, E: 0.2}
+
+    yoga_mobility_supportive:
+      label: Mindful Mobility Seeker
+      share: {trainee: 0.13, trainer: 0.14}
+      trainee:
+        goals: {mobility-yoga: 0.95, general-fitness: 0.5, fat-loss: 0.2}
+        body_goal: {maintenance: 0.6, cut: 0.35, lean-bulk: 0.05}
+        experience: {beginner: 0.55, intermediate: 0.4, advanced: 0.05}
+        style: {structure: [2.4, 0.7], tone: [1.5, 0.5], checkin: [3.0, 0.8], data: [2.0, 0.7]}
+        modality: {in_person_gym: 0.1, home: 0.65, online: 0.55, outdoor: 0.45}
+        schedule: {weekday_morning: 0.8, weekday_afternoon: 0.2, weekday_evening: 0.35, weekend_morning: 0.7, weekend_afternoon: 0.2, weekend_evening: 0.15}
+        budget_inr: [600, 0.35]
+        days_per_week: [3, 5]
+        session_minutes: [45, 60]
+        age: [24, 50]
+        activity: {sedentary: 0.25, light: 0.45, moderate: 0.3}
+        bmi_shift: 0.3
+        female_share: 0.72
+        big5_tilt: {O: 0.6, A: 0.5, N: 0.3}
+      trainer:
+        specializations: {mobility-yoga: 0.97, general-fitness: 0.45, beginner-onboarding: 0.3}
+        style: {structure: [2.5, 0.7], tone: [1.4, 0.5], checkin: [3.0, 0.8], data: [2.0, 0.7]}
+        best_level: {beginner: 0.6, intermediate: 0.35, advanced: 0.05}
+        modality: {in_person_gym: 0.1, home: 0.7, online: 0.6, outdoor: 0.5}
+        schedule: {weekday_morning: 0.9, weekday_afternoon: 0.3, weekday_evening: 0.4, weekend_morning: 0.8, weekend_afternoon: 0.2, weekend_evening: 0.15}
+        price_inr: [650, 0.30]
+        years: [2, 15]
+        certs: [Yoga Certification Board (YCB), RYT-200 (Yoga Alliance)]
+        female_share: 0.7
+        big5_tilt: {A: 0.7, O: 0.6}
+
+    bodybuilding_hypertrophy:
+      label: Hypertrophy Enthusiast
+      share: {trainee: 0.14, trainer: 0.16}
+      trainee:
+        goals: {muscle-gain: 0.95, strength: 0.55, fat-loss: 0.1}
+        body_goal: {bulk: 0.5, lean-bulk: 0.4, cut: 0.1}
+        experience: {beginner: 0.15, intermediate: 0.55, advanced: 0.3}
+        style: {structure: [4.3, 0.6], tone: [4.0, 0.7], checkin: [3.5, 0.8], data: [4.3, 0.6]}
+        modality: {in_person_gym: 0.98, home: 0.05, online: 0.15, outdoor: 0.02}
+        schedule: {weekday_morning: 0.25, weekday_afternoon: 0.15, weekday_evening: 0.85, weekend_morning: 0.5, weekend_afternoon: 0.35, weekend_evening: 0.4}
+        budget_inr: [1000, 0.35]
+        days_per_week: [5, 6]
+        session_minutes: [60, 90]
+        age: [19, 33]
+        activity: {light: 0.2, moderate: 0.4, active: 0.4}
+        bmi_shift: 0.5
+        female_share: 0.2
+        big5_tilt: {E: 0.5, C: 0.5, A: -0.2}
+      trainer:
+        specializations: {muscle-gain: 0.97, strength: 0.7, fat-loss: 0.25}
+        style: {structure: [4.4, 0.5], tone: [4.1, 0.7], checkin: [3.6, 0.7], data: [4.4, 0.5]}
+        best_level: {beginner: 0.1, intermediate: 0.55, advanced: 0.35}
+        modality: {in_person_gym: 0.98, home: 0.1, online: 0.25, outdoor: 0.02}
+        schedule: {weekday_morning: 0.5, weekday_afternoon: 0.3, weekday_evening: 0.9, weekend_morning: 0.6, weekend_afternoon: 0.4, weekend_evening: 0.4}
+        price_inr: [1000, 0.30]
+        years: [3, 12]
+        certs: [ISSA-CPT, K11-CPT, Gold's Gym Fitness Institute, NASM-CPT]
+        female_share: 0.12
+        big5_tilt: {E: 0.6, C: 0.5}
+
+    post40_general_lowimpact:
+      label: Healthy-Ageing Low-Impact
+      share: {trainee: 0.11, trainer: 0.1}
+      trainee:
+        goals: {general-fitness: 0.9, mobility-yoga: 0.55, fat-loss: 0.4}
+        body_goal: {maintenance: 0.55, cut: 0.45}
+        experience: {beginner: 0.8, intermediate: 0.18, advanced: 0.02}
+        style: {structure: [3.5, 0.7], tone: [1.8, 0.6], checkin: [3.8, 0.7], data: [2.8, 0.8]}
+        modality: {in_person_gym: 0.45, home: 0.65, online: 0.3, outdoor: 0.35}
+        schedule: {weekday_morning: 0.7, weekday_afternoon: 0.45, weekday_evening: 0.25, weekend_morning: 0.5, weekend_afternoon: 0.2, weekend_evening: 0.1}
+        budget_inr: [900, 0.35]
+        days_per_week: [2, 4]
+        session_minutes: [30, 45]
+        age: [40, 55]
+        activity: {sedentary: 0.45, light: 0.45, moderate: 0.1}
+        bmi_shift: 2.0
+        female_share: 0.5
+        big5_tilt: {A: 0.5, C: 0.4, E: -0.2}
+      trainer:
+        specializations: {general-fitness: 0.9, mobility-yoga: 0.5, fat-loss: 0.35, beginner-onboarding: 0.4}
+        style: {structure: [3.5, 0.6], tone: [1.7, 0.6], checkin: [3.9, 0.6], data: [2.9, 0.8]}
+        best_level: {beginner: 0.85, intermediate: 0.15}
+        modality: {in_person_gym: 0.5, home: 0.7, online: 0.35, outdoor: 0.3}
+        schedule: {weekday_morning: 0.8, weekday_afternoon: 0.6, weekday_evening: 0.3, weekend_morning: 0.5, weekend_afternoon: 0.2, weekend_evening: 0.1}
+        price_inr: [900, 0.30]
+        years: [5, 20]
+        certs: [ACSM-CPT, ACE-CPT, REPs India Level 3]
+        female_share: 0.45
+        big5_tilt: {A: 0.7, C: 0.5}
+
+    endurance_runner:
+      label: Endurance Runner
+      share: {trainee: 0.09, trainer: 0.09}
+      trainee:
+        goals: {endurance: 0.95, fat-loss: 0.3, general-fitness: 0.3, sport-specific: 0.2}
+        body_goal: {maintenance: 0.55, cut: 0.35, lean-bulk: 0.1}
+        experience: {beginner: 0.25, intermediate: 0.5, advanced: 0.25}
+        style: {structure: [4.1, 0.6], tone: [3.2, 0.8], checkin: [3.0, 0.8], data: [4.6, 0.5]}
+        modality: {in_person_gym: 0.2, home: 0.15, online: 0.55, outdoor: 0.95}
+        schedule: {weekday_morning: 0.85, weekday_afternoon: 0.05, weekday_evening: 0.3, weekend_morning: 0.95, weekend_afternoon: 0.05, weekend_evening: 0.1}
+        budget_inr: [700, 0.35]
+        days_per_week: [4, 6]
+        session_minutes: [45, 75]
+        age: [22, 42]
+        activity: {moderate: 0.35, active: 0.5, very_active: 0.15}
+        bmi_shift: -1.5
+        female_share: 0.35
+        big5_tilt: {C: 0.6, O: 0.4, E: -0.1}
+      trainer:
+        specializations: {endurance: 0.97, sport-specific: 0.4, general-fitness: 0.3, fat-loss: 0.3}
+        style: {structure: [4.2, 0.5], tone: [3.2, 0.7], checkin: [3.1, 0.7], data: [4.7, 0.4]}
+        best_level: {beginner: 0.25, intermediate: 0.5, advanced: 0.25}
+        modality: {in_person_gym: 0.15, home: 0.1, online: 0.6, outdoor: 0.95}
+        schedule: {weekday_morning: 0.9, weekday_afternoon: 0.1, weekday_evening: 0.35, weekend_morning: 0.95, weekend_afternoon: 0.1, weekend_evening: 0.1}
+        price_inr: [750, 0.30]
+        years: [3, 15]
+        certs: [World Athletics Coach L1, ACSM-CPT, ACE-CPT]
+        female_share: 0.3
+        big5_tilt: {C: 0.6, O: 0.4}
+
+    budget_home_student:
+      label: Budget Home Trainer
+      share: {trainee: 0.09, trainer: 0.1}
+      trainee:
+        goals: {general-fitness: 0.7, beginner-onboarding: 0.6, muscle-gain: 0.45, fat-loss: 0.25}
+        body_goal: {lean-bulk: 0.4, maintenance: 0.3, cut: 0.2, bulk: 0.1}
+        experience: {beginner: 0.8, intermediate: 0.18, advanced: 0.02}
+        style: {structure: [3.0, 0.8], tone: [3.0, 0.9], checkin: [2.5, 0.8], data: [3.0, 0.9]}
+        modality: {in_person_gym: 0.15, home: 0.85, online: 0.75, outdoor: 0.3}
+        schedule: {weekday_morning: 0.15, weekday_afternoon: 0.4, weekday_evening: 0.7, weekend_morning: 0.3, weekend_afternoon: 0.6, weekend_evening: 0.5}
+        budget_inr: [350, 0.30]
+        days_per_week: [3, 5]
+        session_minutes: [30, 45]
+        age: [18, 24]
+        activity: {sedentary: 0.3, light: 0.45, moderate: 0.25}
+        bmi_shift: -0.5
+        female_share: 0.4
+        big5_tilt: {E: 0.4, O: 0.4, C: -0.3}
+      trainer:
+        specializations: {general-fitness: 0.8, beginner-onboarding: 0.7, muscle-gain: 0.4, fat-loss: 0.3}
+        style: {structure: [3.0, 0.7], tone: [3.0, 0.8], checkin: [2.6, 0.7], data: [3.0, 0.8]}
+        best_level: {beginner: 0.85, intermediate: 0.15}
+        modality: {in_person_gym: 0.1, home: 0.8, online: 0.85, outdoor: 0.3}
+        schedule: {weekday_morning: 0.2, weekday_afternoon: 0.5, weekday_evening: 0.75, weekend_morning: 0.4, weekend_afternoon: 0.6, weekend_evening: 0.5}
+        price_inr: [400, 0.25]
+        years: [1, 5]
+        certs: [ISSA-CPT, K11-CPT, ACE-CPT]
+        female_share: 0.35
+        big5_tilt: {E: 0.5, O: 0.4}

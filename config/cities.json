@@ -1,0 +1,59 @@
+{
+  "_comment": "Supported cities. bbox = [south, west, north, east] used for Overpass queries and clipping synthetic locations. weight = share of synthetic users. Shared by Node (scripts/, services/) and Python (ml/).",
+  "cities": {
+    "bengaluru": {
+      "name": "Bengaluru",
+      "aliases": ["bangalore", "bengaluru", "blr"],
+      "bbox": [12.83, 77.45, 13.14, 77.78],
+      "center": [12.9716, 77.5946],
+      "weight": 0.40,
+      "languages": ["English", "Kannada", "Hindi", "Tamil", "Telugu"],
+      "priceMultiplier": 1.1
+    },
+    "mumbai": {
+      "name": "Mumbai",
+      "aliases": ["mumbai", "bombay"],
+      "bbox": [18.89, 72.78, 19.27, 72.99],
+      "center": [19.076, 72.8777],
+      "weight": 0.14,
+      "languages": ["English", "Hindi", "Marathi", "Gujarati"],
+      "priceMultiplier": 1.25
+    },
+    "delhi": {
+      "name": "Delhi",
+      "aliases": ["delhi", "new delhi", "ncr"],
+      "bbox": [28.43, 76.95, 28.80, 77.33],
+      "center": [28.6139, 77.209],
+      "weight": 0.14,
+      "languages": ["English", "Hindi", "Punjabi"],
+      "priceMultiplier": 1.15
+    },
+    "chennai": {
+      "name": "Chennai",
+      "aliases": ["chennai", "madras"],
+      "bbox": [12.90, 80.12, 13.20, 80.31],
+      "center": [13.0827, 80.2707],
+      "weight": 0.10,
+      "languages": ["English", "Tamil", "Hindi"],
+      "priceMultiplier": 0.95
+    },
+    "hyderabad": {
+      "name": "Hyderabad",
+      "aliases": ["hyderabad", "secunderabad", "hyd"],
+      "bbox": [17.30, 78.33, 17.55, 78.60],
+      "center": [17.385, 78.4867],
+      "weight": 0.12,
+      "languages": ["English", "Telugu", "Hindi", "Urdu"],
+      "priceMultiplier": 1.0
+    },
+    "pune": {
+      "name": "Pune",
+      "aliases": ["pune", "poona"],
+      "bbox": [18.43, 73.74, 18.63, 73.98],
+      "center": [18.5204, 73.8567],
+      "weight": 0.10,
+      "languages": ["English", "Marathi", "Hindi"],
+      "priceMultiplier": 0.95
+    }
+  }
+}

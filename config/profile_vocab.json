@@ -1,0 +1,22 @@
+{
+  "_comment": "Controlled vocabularies shared by Node (services/, scripts/) and Python (ml/). Order matters: feature vectors use these orders.",
+  "goals": ["fat-loss", "muscle-gain", "strength", "endurance", "mobility-yoga", "sport-specific", "general-fitness", "beginner-onboarding"],
+  "bodyGoals": ["cut", "bulk", "lean-bulk", "maintenance"],
+  "modalities": ["in_person_gym", "home", "online", "outdoor"],
+  "days": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+  "dayparts": ["morning", "afternoon", "evening"],
+  "styleAxes": {
+    "structure": "1 = flexible plan … 5 = strict plan",
+    "tone": "1 = supportive … 5 = tough-love",
+    "checkin": "1 = rare check-ins … 5 = daily check-ins",
+    "data": "1 = intuitive … 5 = data-driven"
+  },
+  "experienceLevels": ["beginner", "intermediate", "advanced"],
+  "activityLevels": ["sedentary", "light", "moderate", "active", "very_active"],
+  "dietPrefs": ["veg", "non-veg", "eggetarian", "vegan", "jain"],
+  "allergens": ["dairy", "gluten", "egg", "fish", "shellfish", "peanuts", "tree_nuts", "soy", "sesame", "mustard"],
+  "equipment": ["body only", "dumbbell", "barbell", "kettlebells", "bands", "cable", "machine", "medicine ball", "exercise ball", "e-z curl bar", "foam roll"],
+  "languages": ["English", "Hindi", "Kannada", "Tamil", "Telugu", "Marathi", "Gujarati", "Punjabi", "Urdu", "Bengali", "Malayalam"],
+  "certifications": ["ACE-CPT", "NASM-CPT", "ACSM-CPT", "ISSA-CPT", "NSCA-CSCS", "K11-CPT", "REPs India Level 3", "Gold's Gym Fitness Institute", "Yoga Certification Board (YCB)", "RYT-200 (Yoga Alliance)", "Precision Nutrition L1", "CrossFit Level 1", "World Athletics Coach L1"],
+  "big5": ["O", "C", "E", "A", "N"]
+}

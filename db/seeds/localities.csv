@@ -1,0 +1,103 @@
+city,name,lat,lng,osm_id,source
+Bengaluru,"Indiranagar",12.973291,77.640467,node/448991617,nominatim
+Bengaluru,"Koramangala",12.935737,77.624081,node/429918282,nominatim
+Bengaluru,"HSR Layout",12.911623,77.638862,relation/17168010,nominatim
+Bengaluru,"Jayanagar",12.929273,77.582423,node/429853334,nominatim
+Bengaluru,"JP Nagar",12.909694,77.586607,relation/17205864,nominatim
+Bengaluru,"BTM Layout",12.914001,77.610282,node/447032046,nominatim
+Bengaluru,"Whitefield",12.995743,77.757949,node/5760197744,nominatim
+Bengaluru,"Marathahalli",12.955257,77.698416,relation/19884550,nominatim
+Bengaluru,"Bellandur",12.932049,77.684292,relation/19884585,nominatim
+Bengaluru,"Electronic City",12.848760,77.648253,way/287685707,nominatim
+Bengaluru,"Hebbal",13.038218,77.591900,relation/19883365,nominatim
+Bengaluru,"Yelahanka",13.100698,77.596345,node/430143744,nominatim
+Bengaluru,"Malleshwaram",13.002735,77.570325,node/427595936,nominatim
+Bengaluru,"Rajajinagar",13.000523,77.549617,node/5760198632,nominatim
+Bengaluru,"Basavanagudi",12.941726,77.575502,node/429937956,nominatim
+Bengaluru,"Banashankari",12.927820,77.556621,node/12816045429,nominatim
+Bengaluru,"Vijayanagar",12.970954,77.537385,node/5760197784,nominatim
+Bengaluru,"RT Nagar",13.022720,77.595715,node/430043651,nominatim
+Bengaluru,"Frazer Town",12.997585,77.613674,node/430051517,nominatim
+Bengaluru,"Ulsoor",12.977879,77.624670,relation/19884505,nominatim
+Bengaluru,"Shivajinagar",12.985529,77.605450,relation/19884596,nominatim
+Bengaluru,"Domlur",12.962467,77.638196,node/347261886,nominatim
+Bengaluru,"Banaswadi",13.014162,77.651854,relation/19883482,nominatim
+Bengaluru,"Kalyan Nagar",13.022142,77.640337,node/567772575,nominatim
+Bengaluru,"HBR Layout",13.031992,77.628079,relation/19883455,nominatim
+Bengaluru,"Hennur",13.037077,77.641357,node/12468364695,nominatim
+Bengaluru,"Thanisandra",13.052250,77.631615,relation/19883250,nominatim
+Bengaluru,"Yeshwanthpur",13.017694,77.555501,way/1238794971,nominatim
+Bengaluru,"Peenya",13.032981,77.533180,node/5760198625,nominatim
+Bengaluru,"Kengeri",12.917657,77.483757,node/308062102,nominatim
+Bengaluru,"Rajarajeshwari Nagar",12.927441,77.515522,node/447063719,nominatim
+Bengaluru,"Hulimavu",12.877349,77.602803,node/4076243857,nominatim
+Bengaluru,"Bommanahalli",12.903458,77.623003,relation/19883267,nominatim
+Bengaluru,"Mahadevapura",12.996545,77.692718,node/5760197764,nominatim
+Bengaluru,"KR Puram",13.007516,77.695935,node/442134548,nominatim
+Bengaluru,"Brookefield",12.965209,77.717936,node/378717492,nominatim
+Bengaluru,"CV Raman Nagar",12.985099,77.663117,way/346775300,nominatim
+Bengaluru,"Sadashivanagar",13.011019,77.580864,node/461539035,nominatim
+Bengaluru,"Richmond Town",12.963555,77.601586,node/5164714917,nominatim
+Bengaluru,"Wilson Garden",12.948934,77.596827,node/429921851,nominatim
+Bengaluru,"Nagarbhavi",12.951235,77.519054,relation/19883499,nominatim
+Bengaluru,"Kammanahalli",13.014854,77.638203,node/6330202097,nominatim
+Bengaluru,"Sarjapura",12.914960,77.675195,way/1185509247,nominatim
+Bengaluru,"Kadugodi",12.995743,77.757949,node/5760197744,nominatim
+Mumbai,"Andheri West",19.117249,72.833968,node/884364390,nominatim
+Mumbai,"Bandra West",19.058336,72.830267,way/300718053,nominatim
+Mumbai,"Powai",19.118720,72.907348,node/4759418251,nominatim
+Mumbai,"Goregaon",19.164869,72.849549,node/3347034961,nominatim
+Mumbai,"Malad",19.186719,72.848588,node/3347034598,nominatim
+Mumbai,"Borivali",19.229068,72.857363,node/3347009325,nominatim
+Mumbai,"Dadar",19.019227,72.842848,node/2630075004,nominatim
+Mumbai,"Chembur",19.054818,72.897971,node/632314632,nominatim
+Mumbai,"Lower Parel",18.995680,72.830276,node/621911847,nominatim
+Mumbai,"Juhu",19.107021,72.827528,node/1640244289,nominatim
+Mumbai,"Colaba",18.915091,72.825969,node/1640184983,nominatim
+Mumbai,"Santacruz",19.079289,72.847118,node/12074909130,nominatim
+Delhi,"Connaught Place",28.631770,77.219380,node/561299050,nominatim
+Delhi,"Saket",28.521168,77.202224,node/6179179025,nominatim
+Delhi,"Hauz Khas",28.549809,77.207764,relation/3657008,nominatim
+Delhi,"Lajpat Nagar",28.566092,77.243285,node/10815131003,nominatim
+Delhi,"Dwarka",28.615887,77.022434,node/6541854254,nominatim
+Delhi,"Rohini",28.706308,77.108789,relation/21182288,nominatim
+Delhi,"Vasant Kunj",28.529249,77.154134,relation/3562238,nominatim
+Delhi,"Karol Bagh",28.652998,77.189023,relation/3478656,nominatim
+Delhi,"Rajouri Garden",28.649056,77.122720,node/6453992649,nominatim
+Delhi,"Greater Kailash",28.541908,77.238493,node/2833058716,nominatim
+Delhi,"Mayur Vihar",28.609855,77.292632,node/10815246204,nominatim
+Delhi,"Janakpuri",28.621927,77.087476,relation/3448436,nominatim
+Chennai,"T. Nagar",13.037829,80.231836,node/12255801857,nominatim
+Chennai,"Adyar",13.006450,80.257779,relation/7880736,nominatim
+Chennai,"Anna Nagar",13.088249,80.207340,relation/7887722,nominatim
+Chennai,"Velachery",12.980166,80.222851,way/422418168,nominatim
+Chennai,"Mylapore",13.031647,80.270017,node/247677540,nominatim
+Chennai,"Nungambakkam",13.062063,80.240487,node/247688962,nominatim
+Chennai,"Porur",13.032458,80.158286,node/243327790,nominatim
+Chennai,"Besant Nagar",12.999691,80.268226,node/249497705,nominatim
+Chennai,"Kilpauk",13.083215,80.237986,node/252300596,nominatim
+Chennai,"Perungudi",12.971024,80.241805,relation/7879836,nominatim
+Chennai,"Tambaram",12.938128,80.134536,way/355005849,nominatim
+Hyderabad,"Banjara Hills",17.417746,78.439901,node/1986351715,nominatim
+Hyderabad,"Jubilee Hills",17.430836,78.410288,node/2926946740,nominatim
+Hyderabad,"Gachibowli",17.443622,78.351964,node/701232038,nominatim
+Hyderabad,"Madhapur",17.440892,78.391630,node/349267516,nominatim
+Hyderabad,"Kondapur",17.458791,78.373056,node/2237665097,nominatim
+Hyderabad,"Kukatpally",17.493084,78.405441,node/1184187429,nominatim
+Hyderabad,"Begumpet",17.446195,78.463016,node/1986350814,nominatim
+Hyderabad,"Ameerpet",17.437501,78.448251,node/2461447803,nominatim
+Hyderabad,"Secunderabad",17.433725,78.500683,node/2460862103,nominatim
+Hyderabad,"Miyapur",17.498161,78.356763,node/4711167390,nominatim
+Hyderabad,"Dilsukhnagar",17.368443,78.522860,node/2217960497,nominatim
+Pune,"Koregaon Park",18.536623,73.893274,way/1304315209,nominatim
+Pune,"Kothrud",18.507262,73.805668,way/1428534377,nominatim
+Pune,"Viman Nagar",18.570388,73.913334,node/12866376980,nominatim
+Pune,"Baner",18.558994,73.784523,node/6616602606,nominatim
+Pune,"Aundh",18.561883,73.810196,node/245648364,nominatim
+Pune,"Wakad",18.602249,73.764445,node/1229121214,nominatim
+Pune,"Hadapsar",18.500774,73.937915,node/2280623602,nominatim
+Pune,"Kalyani Nagar",18.548138,73.902551,node/2263008472,nominatim
+Pune,"Shivajinagar",18.532591,73.851311,node/763549837,nominatim
+Pune,"Deccan Gymkhana",18.515893,73.841160,node/674076717,nominatim
+Pune,"Magarpatta",18.511154,73.927382,way/469322847,nominatim
+Pune,"Pimple Saudagar",18.598155,73.797766,node/4714951302,nominatim
