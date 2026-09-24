@@ -1,0 +1,11 @@
+node_modules/
+.env
+ml/.venv/
+ml/data/raw/
+__pycache__/
+*.pyc
+backups/
+test-results/
+playwright-report/
+tests/visual/__diff__/
+blob-report/

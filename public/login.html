@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Now</title>
+    <link rel="icon" type="image/png" href="webicon1.png">
+    <link rel="stylesheet" href="login.css">
+
+</head>
+<body>
+    <div class="title"><h1>TrainSync</h1></div>
+    <video autoplay muted loop id="bg-video">
+        <source src="backgroundhome.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <form id="loginForm">
+        <div class="Registration">
+            <h4>Login Now</h4>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required><br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Log In</button>
+            <p id="errorMessage" style="color: red;"></p>
+            <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
+        </div>
+    </form>
+</body>
+</html>
+
+<script>
+    // Add this at the top of your script section
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const res = await fetch("http://localhost:5000/auth/session", {
+            credentials: "include"
+            });
+            const data = await res.json();
+            
+            if (data.loggedIn) {
+            window.location.href = "homepage1.html";
+            }
+        } catch (err) {
+            console.error("Session check failed:", err);
+        }
+    });
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+  
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+  
+      try {
+        const response = await fetch("http://localhost:5000/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Keeps session active
+          body: JSON.stringify({ email, password })
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          alert("Login successful!");
+          window.location.href = "homepage1.html"; // ✅ Go to homepage after login
+        } else {
+          document.getElementById("errorMessage").innerText = data.message || "Invalid email or password";
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        document.getElementById("errorMessage").innerText = "Something went wrong. Try again.";
+      }
+    });
+  </script>
+  
