@@ -39,3 +39,24 @@ The rest of the 17 are in `db/seeds/food_manifest.json`. The manifest itself is 
 
 - **Dishes** (`db/seeds/dishes.js`): 182 common Indian dishes. Each is written down as grams per ingredient for one serving. Those proportions are my estimates of typical home recipes, not lab measurements. Everything else is **computed** from the USDA ingredients (`services/dishNutrition.js`): kcal and macros, `diet_pref`, `suitable_for` (vegan / veg / eggetarian / non-veg / jain) and allergens.
 - **Synthetic people:** see `ml/README.md`. All of them are `is_synthetic = 1`.
+
+## Added in v3
+
+| Source | Status | License | Notes |
+|---|---|---|---|
+| **Poppins** font (via `@fontsource/poppins`) | Used | SIL OFL 1.1 | Self-hosted in `public/fonts/` (licence file included) |
+| **Leaflet** | Used | BSD-2-Clause | Vendored in `public/vendor/leaflet/` |
+| **Chart.js** | Vendored, reserved | MIT | `public/vendor/` |
+| **HiGHS** (`highs` npm, WebAssembly) | Used | MIT | Meal-plan optimiser, runs in process |
+| **2024 Adult Compendium of Physical Activities** | Used (3 MET values) | Free to use with citation | Herrmann et al., *J Sport Health Sci* 2024. Values in `config/training.json` → `met` |
+| **PAR-Q+** (short form, adapted questions) | Used | Free for use | Health screen in onboarding; any "yes" makes plans conservative |
+| OpenStreetMap map **tiles** | Used | ODbL / OSMF tile policy | Loaded from tile.openstreetmap.org with attribution. For heavy traffic, switch to a tile provider per the OSMF usage policy |
+| Google Maps **links** | Used | Links only, no API | "Directions" / "Google Maps" buttons open google.com/maps URLs. No key and no embedded Google content |
+| USDA FDC Foundation Foods / FNDDS | Evaluated, **not added** | CC0 | The SR Legacy import already covers every dish ingredient, including fibre |
+| Indian Nutrient Databank (INDB) | **Not used** | Licence not confirmed | Skipped until the licence is verified. IFCT 2017 is not openly licensed |
+| Open Food Facts | **Not used** | ODbL (share-alike) | Mixing it into `foods` would put the derived database under ODbL. Not needed for home-cooked dishes |
+| wger exercises | **Not used** | CC BY-SA 4.0 | free-exercise-db (public domain) already gives 876 exercises |
+| NHANES body measures | **Not used yet** | Public domain | Planned for more realistic synthetic body metrics |
+| all-MiniLM-L6-v2 embeddings | **Not used** | Apache-2.0 | Interests match on tags and hobby words instead, which keeps inference in JS on Vercel |
+
+**Compliance note (OSM):** the `gyms` table is an ODbL *derivative database*. Showing it in the app with attribution is fine. If the gym data itself is ever published (downloads, an API for others), the OSM-derived part must be offered under ODbL.

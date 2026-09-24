@@ -8,7 +8,6 @@
 //                 their phase replaces them.
 const { test, expect } = require('@playwright/test');
 const { freezeMedia, compareToBaseline, MAX_DIFF_RATIO } = require('./helpers');
-const { loginAs } = require('../setup/users');
 const { stablePage } = require('../setup/pageMocks');
 
 const V3_VIEWPORTS = {
@@ -25,18 +24,17 @@ const V3_PAGES = [
   { name: 'privacy', path: '/privacy.html' },
   { name: 'workoutplans', path: '/workoutplans.html' },
   { name: 'dietplans', path: '/dietplans.html' },
+  { name: 'trainermatch', path: '/trainermatch.html' },
+  { name: 'gyms', path: '/gyms.html' },
 ];
 
 const LEGACY_VIEWPORTS = {
   desktop: { width: 1440, height: 900 },
   mobile: { width: 390, height: 844 },
 };
-const LEGACY_PAGES = [
-  { name: 'homepage1', path: '/homepage1.html', setup: page => loginAs(page, 'trainee') },
-  { name: 'trainermatch', path: '/trainermatch.html' },
-
-  { name: 'gyms', path: '/gyms.html' },
-];
+// Every page is on the v3 design system now. The dashboard is covered by e2e
+// tests instead (it shows today's date and live data).
+const LEGACY_PAGES = [];
 
 async function capture(page, name, pageDef) {
   await page.goto(pageDef.path, { waitUntil: 'load' });

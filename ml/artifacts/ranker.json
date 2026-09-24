@@ -1,0 +1,70 @@
+{
+  "version": "ranker-20260924",
+  "trainedAt": "2026-09-24T18:54:07+00:00",
+  "model": "non-negative linear ranker, pairwise logistic regression",
+  "features": [
+    "goals",
+    "schedule",
+    "style",
+    "distance",
+    "personality",
+    "budget",
+    "level",
+    "interests",
+    "modality",
+    "quality"
+  ],
+  "weights": {
+    "goals": 0.2602,
+    "schedule": 0.1573,
+    "style": 0.1596,
+    "distance": 0.3074,
+    "personality": 0.0098,
+    "budget": 0.084,
+    "level": 0.0217,
+    "interests": 0.0,
+    "modality": 0.0,
+    "quality": 0.0
+  },
+  "metrics": {
+    "ndcg@10": 0.5754,
+    "precision@5": 0.5847,
+    "same_archetype@10": 0.229
+  },
+  "baselines": {
+    "random": {
+      "ndcg@10": 0.2633,
+      "precision@5": 0.25,
+      "same_archetype@10": 0.12
+    },
+    "distance only": {
+      "ndcg@10": 0.4283,
+      "precision@5": 0.4247,
+      "same_archetype@10": 0.1337
+    },
+    "goals + distance": {
+      "ndcg@10": 0.5647,
+      "precision@5": 0.582,
+      "same_archetype@10": 0.2187
+    },
+    "rule weights (default)": {
+      "ndcg@10": 0.5631,
+      "precision@5": 0.5727,
+      "same_archetype@10": 0.2423
+    },
+    "learned weights": {
+      "ndcg@10": 0.5754,
+      "precision@5": 0.5847,
+      "same_archetype@10": 0.229
+    }
+  },
+  "exposureRatioByGender": {
+    "male": 1.004,
+    "female": 0.992
+  },
+  "data": {
+    "pairs": 60000,
+    "trainees": 1500,
+    "note": "synthetic population; hidden ground truth"
+  }
+}

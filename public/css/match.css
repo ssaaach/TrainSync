@@ -1,0 +1,69 @@
+/* Trainer match: grid of large rounded cards (ref-profile-cards.png) in the TrainSync identity. */
+.m-head { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: end; justify-content: space-between; margin-bottom: var(--s-4); }
+.m-head h1 { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85); }
+.m-tools { display: flex; gap: var(--s-2); align-items: center; }
+.m-tools[hidden] { display: none; }
+.m-search { position: relative; display: block; width: min(320px, 70vw); }
+.m-search .ts-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--c-text-muted); }
+.m-search .ts-input { padding-left: 42px; border-radius: var(--r-pill); background: rgba(0, 0, 0, 0.55); }
+.m-filters { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-5); }
+.m-filters[hidden] { display: none; }
+.m-filters select {
+  min-height: 36px; padding: 0 30px 0 var(--s-4); border-radius: var(--r-pill); border: 1px solid var(--c-line-strong);
+  background: rgba(0, 0, 0, 0.45); color: var(--c-text); font-size: var(--fs-sm); appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-text-muted) 50%), linear-gradient(135deg, var(--c-text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.m-filters select.is-set { border-color: var(--c-gold); background-color: var(--c-gold-soft); }
+
+.m-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.m-card {
+  position: relative; display: flex; flex-direction: column; min-height: 360px; overflow: hidden;
+  border-radius: var(--r-xl); border: 1px solid var(--c-line); background: linear-gradient(170deg, #232120, #0d0d0d 70%);
+  box-shadow: var(--sh-1); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.m-card:hover, .m-card:focus-within { transform: translateY(-3px); border-color: var(--c-gold-line); box-shadow: var(--sh-2); }
+.m-card__media {
+  position: relative; height: 170px; display: grid; place-items: center;
+  background: radial-gradient(circle at 30% 20%, rgba(213, 173, 166, 0.28), transparent 60%), radial-gradient(circle at 80% 90%, rgba(255, 204, 0, 0.16), transparent 55%), #171514;
+}
+.m-avatar { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; font-size: 2rem; font-weight: var(--fw-semibold); color: var(--c-on-gold); background: linear-gradient(135deg, var(--c-gold), #e0a100); box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.35); }
+.m-card__heart { position: absolute; top: var(--s-3); right: var(--s-3); }
+.m-card__heart[aria-pressed="true"] { background: var(--c-gold); color: var(--c-on-gold); }
+.m-card__heart[aria-pressed="true"] .ts-icon { fill: currentColor; }
+.m-card__score { position: absolute; top: var(--s-3); left: var(--s-3); }
+.m-card__sample { position: absolute; bottom: var(--s-3); left: var(--s-3); }
+.m-card__body { padding: var(--s-4); display: grid; gap: 6px; flex: 1; align-content: start; }
+.m-card__name { display: flex; align-items: center; gap: 6px; font-size: var(--fs-lg); font-weight: var(--fw-semibold); }
+.m-card__name .ts-icon { color: var(--c-gold); width: 18px; height: 18px; }
+.m-card__meta { font-size: var(--fs-xs); color: var(--c-text-muted); }
+.m-card__reason { font-size: var(--fs-sm); color: var(--c-text-soft); }
+.m-card__reason::before { content: '✓ '; color: var(--c-gold); }
+.m-card__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); padding: 0 var(--s-4) var(--s-4); }
+.m-card__open { position: absolute; inset: 0; z-index: 1; border-radius: inherit; background: transparent; border: 0; padding: 0; cursor: pointer; }
+.m-card__open:focus-visible { outline: 2px solid var(--c-focus-ring); outline-offset: -3px; }
+.m-card__heart, .m-card__plus { z-index: 2; }
+.m-card__plus[aria-pressed="true"] { background: var(--c-gold); color: var(--c-on-gold); border-color: var(--c-gold); }
+.m-price { font-weight: var(--fw-semibold); }
+.m-price span { font-size: var(--fs-xs); color: var(--c-text-muted); font-weight: var(--fw-regular); }
+
+/* detail sheet */
+.m-summary { display: grid; grid-template-columns: auto 1fr; gap: var(--s-4); align-items: center; padding: var(--s-4); border-radius: var(--r-xl); background: linear-gradient(160deg, rgba(213, 173, 166, 0.14), rgba(255, 255, 255, 0.03)); border: 1px solid var(--c-warm-line); }
+.m-summary .m-avatar { width: 72px; height: 72px; font-size: 1.5rem; }
+.m-summary h2 { font-size: var(--fs-xl); }
+.m-kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--s-3); margin: var(--s-4) 0; }
+.m-kv div { padding: var(--s-3); border-radius: var(--r-md); background: rgba(255, 255, 255, 0.04); }
+.m-kv dt { font-size: var(--fs-xs); color: var(--c-text-muted); }
+.m-kv dd { margin: 0; font-weight: var(--fw-medium); }
+.m-why { display: grid; gap: var(--s-2); margin: var(--s-3) 0 var(--s-5); }
+.m-section-title { font-size: var(--fs-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--c-gold); margin-top: var(--s-5); }
+.m-slots { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.m-slot[aria-pressed="true"] { background: var(--c-gold); border-color: var(--c-gold); color: var(--c-on-gold); }
+.m-compare { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.m-compare th, .m-compare td { padding: var(--s-2) var(--s-3); border-bottom: 1px solid var(--c-line); text-align: left; vertical-align: top; }
+.m-compare th { color: var(--c-text-muted); font-weight: var(--fw-medium); }
+.m-list { display: grid; gap: var(--s-3); }
+.m-req { display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: var(--r-lg); border: 1px solid var(--c-line); background: rgba(0, 0, 0, 0.35); }
+.m-req__top { display: flex; justify-content: space-between; gap: var(--s-3); align-items: center; flex-wrap: wrap; }
+.m-req__actions { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.m-empty { padding: var(--s-7) var(--s-5); text-align: center; display: grid; gap: var(--s-3); justify-items: center; }

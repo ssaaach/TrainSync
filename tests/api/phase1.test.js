@@ -129,7 +129,7 @@ describe('auth validation', () => {
     await agent.post('/api/auth/login', { email: `trainee${DOMAIN}`, password: PASSWORD });
     const res = await agent.get('/home');
     expect(res.status).toBe(200);
-    expect(res.text).toMatch(/Sore Today/);
+    expect(res.text).toMatch(/Sore today/i);
   });
 });
 

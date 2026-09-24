@@ -40,7 +40,7 @@
     }).join('');
     const pct = Math.round((t.kcal / target) * 100);
     return h('div', { class: 'd-ring', role: 'img', 'aria-label': `${t.kcal} kcal, ${pct}% of target. Protein ${Math.round((p / total) * 100)}%, carbs ${Math.round((c / total) * 100)}%, fat ${Math.round((f / total) * 100)}% of energy.` },
-      h('svg', { viewBox: '0 0 100 100', html: `<circle r="${R}" cx="50" cy="50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12"/>${circles}` }),
+      h('div', { html: `<svg viewBox="0 0 100 100"><circle r="${R}" cx="50" cy="50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12"/>${circles}</svg>` }),
       h('div', { class: 'd-ring__label' }, h('strong', { text: String(t.kcal) }), h('span', { text: 'kcal' })));
   }
 

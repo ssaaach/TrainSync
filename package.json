@@ -24,7 +24,8 @@
     "start:cluster": "node cluster.js",
     "lint": "eslint . && node scripts/py.js -m ruff check ml",
     "vercel-build": "node scripts/migrate.js",
-    "assets": "node scripts/build-assets.js"
+    "assets": "node scripts/build-assets.js",
+    "train": "node scripts/ml/export-pairs.js && node scripts/py.js ml/train_ranker.py"
   },
   "author": "",
   "license": "ISC",

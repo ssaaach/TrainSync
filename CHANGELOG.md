@@ -2,6 +2,54 @@
 
 v3 is built in phases (see `docs/PLAN.md`). Each entry lists what changed, how to check it, and the gates that passed.
 
+## v3 Phases D–I: plans, matching, dashboard, gyms, release (2026-09-25)
+
+**Workout plans** (`services/workoutGenerator.js`, `config/training.json`, `config/contraindications.json`)
+- **Programming:** periodised 4–12 week blocks (accumulation → intensification → deload every 4th week). Splits run from full body to push/pull/legs ×2 depending on days per week, with movement-pattern slots filled from the 876 free-exercise-db exercises.
+- **Tailoring:**
+  - rep/rest/RPE schemes by goal and experience
+  - body-type modulation: finishers and step targets
+  - weekly set caps per muscle group
+- **Safety:**
+  - contraindication rules for 11 limitations
+  - a flagged PAR-Q+ screen caps RPE at 6
+  - undisclosed health info caps it at 7
+- **Features:** warm-up, cool-down, finisher and an estimated kcal (2024 Compendium METs); "why this exercise" on every lift; safe swaps; set logging; next-week adjustments from the logs.
+- **Tests:** property-tested over 500 random profiles for equipment, contraindications, time budget, volume caps and effort caps.
+
+**Diet plans** (`services/mealPlanner.js`)
+- Each day is a mixed-integer program (HiGHS WebAssembly, in process): one dish per meal, with a continuous portion of 0.5–2 servings.
+- Targets: calories, macros and fibre. Hard rules: diet preference, allergens, no same-day repeats, at most twice a week.
+- A greedy fallback kicks in if the solver fails.
+- Output: grocery list, meal swaps, and a macro ring per day.
+- Measured: **81% of days within ±5% kcal and ±10% of every macro** across 40 random profiles (~3 s per week). The misses are aggressive high-protein cuts.
+
+**Matching** (`services/matching.js`, `routes/match.js`, `ml/train_ranker.py`)
+- **Hard filters:** language, gender preference, capacity, distance, blocks.
+- **Score:** 10 explainable factors (goals, schedule, style, distance, personality, budget, level, interests, modality, ratings). Consent-gated factors drop out cleanly.
+- **Learned weights:** pairwise logistic regression on 60k synthetic pairs against a hidden ground truth.
+  - NDCG@10 **0.575**, versus 0.565 for goals + distance, 0.428 for distance only and 0.263 random
+  - gender exposure ratio 0.99–1.00
+  - a missing artifact falls back to the rule weights
+- **UI and flow** (`trainermatch.html`):
+  - grid of large rounded cards with a compatibility pill, heart (shortlist) and "+" (compare)
+  - removable filter chips, search, saved-only toggle, floating "N shortlisted · Compare" pill
+  - slide-up detail sheet: summary, "why you matched" bars, request a session in a shared free slot
+  - trainer inbox with accept/decline; contact details unlock on acceptance
+  - race-safe acceptance (row lock + capacity check), notifications, block and report
+  - sample (synthetic) profiles are labelled
+
+**Dashboard** (`homepage1.html`)
+- **Trainee:** today's workout, today's meals and targets, body estimate with a somatochart, progress chart and log, top matches and requests with contacts, nearby gyms with directions, notifications, and a privacy center (consent switches, JSON export, account deletion).
+- **Trainer:** requests, capacity, profile completeness, trainees nearby and clients.
+
+**Gyms** (`gyms.html`): city search or "use my location", a 1–15 km radius, a Leaflet + OSM map synced with the list, and Google Maps directions/links, website and phone.
+
+**Hardening**
+- **CSP:** `style-src 'self'`, so no inline styles anywhere.
+- **Cleanup:** legacy CSS, scripts and pages removed. `updateprofile.html` redirects to the profile editor.
+- **Docs:** `docs/DEPLOY.md` (Vercel + managed MySQL, or PM2 + Nginx), a rewritten README, and `DATA_SOURCES.md` updated with evaluated and rejected sources.
+
 ## v3 Phase C: consent, onboarding and data rights (2026-09-24)
 
 **Consent** (`services/consent.js`, migrations 005–006)

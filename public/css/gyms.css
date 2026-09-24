@@ -1,0 +1,23 @@
+.g-search { display: grid; grid-template-columns: minmax(200px, 1fr) auto auto minmax(180px, 240px); gap: var(--s-3); align-items: end; padding: var(--s-5); border-radius: var(--r-xl); margin-bottom: var(--s-4); }
+.g-search .ts-form-error { grid-column: 1 / -1; min-height: 0; }
+@media (max-width: 820px) { .g-search { grid-template-columns: 1fr 1fr; } .g-search .ts-field, .g-radius { grid-column: 1 / -1; } }
+.g-layout { display: grid; gap: var(--s-4); }
+@media (min-width: 1000px) { .g-layout { grid-template-columns: 1.3fr 1fr; align-items: start; } .g-map { position: sticky; top: calc(var(--nav-h) + var(--s-4)); } }
+.g-map { height: min(70vh, 620px); min-height: 340px; border-radius: var(--r-xl); overflow: hidden; isolation: isolate; }
+.g-map.leaflet-container { background: #111; font-family: var(--font); }
+.g-map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(0.85) contrast(0.9); }
+.g-map.leaflet-container .leaflet-control-attribution { background: rgba(0, 0, 0, 0.8); color: var(--c-text-soft); font-size: 11px; }
+.g-map.leaflet-container .leaflet-control-attribution a { color: var(--c-gold); }
+.g-map .leaflet-popup-content-wrapper, .g-map .leaflet-popup-tip { background: #151515; color: var(--c-text); }
+.g-pin { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--c-gold); border: 2px solid #111; box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.25); transition: transform var(--dur) var(--ease); }
+.g-pin.is-active { transform: scale(1.6); background: #fff; }
+.g-pin--me { background: #7fc6ff; box-shadow: 0 0 0 6px rgba(127, 198, 255, 0.25); }
+.g-list { display: grid; gap: var(--s-3); }
+.gym-card { padding: var(--s-4) var(--s-5); border-radius: var(--r-lg); display: grid; gap: 6px; border: 1px solid var(--c-line); transition: border-color var(--dur) var(--ease); }
+.gym-card.is-active, .gym-card:hover { border-color: var(--c-gold-line); }
+.gym-card h3 { font-size: var(--fs-lg); display: flex; justify-content: space-between; gap: var(--s-3); }
+.gym-card h3 span { font-size: var(--fs-sm); color: var(--c-gold); white-space: nowrap; font-weight: var(--fw-semibold); }
+.gym-card p { font-size: var(--fs-sm); color: var(--c-text-soft); }
+.gym-card .g-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
+.g-count { font-size: var(--fs-sm); color: var(--c-text-soft); text-shadow: 0 1px 10px #000; }
+.g-radius input[type="range"] { width: 100%; accent-color: var(--c-gold); }

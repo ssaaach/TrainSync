@@ -1,34 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find A Gym</title>
-    <link rel="icon" type="image/png" href="webicon1.png">
-    <link rel="stylesheet" href="gyms.css">
-    <link rel="stylesheet" href="css/trainsync-ext.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym finder · TrainSync</title>
+  <meta name="description" content="Gyms near you on a live map, with distance, hours and directions in Google Maps.">
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/css/plans.css">
+  <link rel="stylesheet" href="/css/gyms.css">
 </head>
-<body>
-    <video autoplay muted loop id="bg-video">
-        <source src="backgroundhome.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="title" id="trainsynctitle"><h1>TrainSync</h1></div>
-    <form id="GymsearchForm">
-        <div class="SearchGym" id="searchBox">
-            <h4>Find a Gym</h4>
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" required><br><br>
-            <button type="Search">Search</button>
-            <p id="errorMessage" style="color: red;"></p>
-            <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
+<body data-page="gyms">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="p-page">
+    <div class="ts-container ts-container--wide">
+      <header class="p-head">
+        <p class="ts-eyebrow">Gym finder</p>
+        <h1 class="ts-h2">Find a gym near you</h1>
+        <p class="p-head__sub">700+ gyms across 7 Indian cities, from OpenStreetMap. Directions open in Google Maps.</p>
+      </header>
+      <form class="g-search ts-glass" data-g-form>
+        <div class="ts-field">
+          <label class="ts-label" for="city">City</label>
+          <input class="ts-input" id="city" name="city" list="g-cities" placeholder="e.g. Bengaluru" autocomplete="off">
+          <datalist id="g-cities"><option value="Bengaluru"><option value="Mumbai"><option value="Delhi"><option value="Chennai"><option value="Hyderabad"><option value="Pune"><option value="Kolkata"></datalist>
         </div>
-        <div id="gymResults" class="gym-results"></div>
-    </form>
-    
-    <script src="js/common.js"></script>
-    <script src="js/gyms.js"></script>
+        <button class="ts-btn ts-btn--gold" type="submit">Search</button>
+        <button class="ts-btn ts-btn--ghost" type="button" data-g-near>
+          <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-pin"></use></svg> Use my location
+        </button>
+        <div class="o-range g-radius">
+          <label class="ts-label" for="g-radius">Radius <span class="o-range__value" data-g-radius-out>5 km</span></label>
+          <input type="range" id="g-radius" min="1" max="15" value="5" data-g-radius>
+        </div>
+        <p id="errorMessage" class="ts-form-error" role="alert"></p>
+      </form>
+      <div class="g-layout">
+        <div class="g-map ts-glass" data-g-map role="region" aria-label="Map of gyms"></div>
+        <div class="g-list" data-g-list aria-live="polite"><p class="ts-hint">Search a city or use your location.</p></div>
+      </div>
+    </div>
+  </main>
+  <footer data-ts-footer></footer>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script src="/js/gyms.js"></script>
 </body>
 </html>
-
-    

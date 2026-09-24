@@ -123,7 +123,7 @@
            <div class="ts-usermenu__panel" hidden>
              <div class="ts-usermenu__who"><div>${esc(session.name)}</div><div class="ts-dim">${esc(session.email)}</div></div>
              <a href="/homepage1.html">${icon('chart')}Dashboard</a>
-             <a href="/updateprofile.html">${icon('user')}Profile</a>
+             <a href="/onboarding.html">${icon('user')}Profile</a>
              <a href="/homepage1.html#privacy">${icon('shield')}Privacy &amp; data</a>
              <button type="button" data-ts-logout>${icon('logout')}Log out</button>
            </div>
@@ -131,7 +131,7 @@
       : `<a class="ts-btn ts-btn--ghost ts-btn--sm" href="/login.html" data-ts-login>Log in</a>
          <a class="ts-btn ts-btn--gold ts-btn--sm" href="/registration.html">Get started</a>`;
     const mobileActions = session.loggedIn
-      ? `<a href="/updateprofile.html">Profile</a><a href="/homepage1.html#privacy">Privacy &amp; data</a>
+      ? `<a href="/onboarding.html">Profile</a><a href="/homepage1.html#privacy">Privacy &amp; data</a>
          <button class="ts-btn ts-btn--ghost ts-btn--block" type="button" data-ts-logout>Log out</button>`
       : `<a class="ts-btn ts-btn--ghost ts-btn--block" href="/login.html">Log in</a>
          <a class="ts-btn ts-btn--gold ts-btn--block" href="/registration.html">Get started</a>`;

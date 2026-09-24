@@ -82,7 +82,8 @@ describe('trainee plan lifecycle', () => {
   test('log sets, read them back, and get next-week adjustments', async () => {
     const [, session] = Object.entries(plan.sessions)[0];
     const ex = session.exercises[0];
-    const today = new Date().toISOString().slice(0, 10);
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`; // local date
     const sets = Array.from({ length: ex.sets + 1 }, () => ({ reps: ex.reps[1], load_kg: 50, rpe: 6, done: true }));
     expect((await api.post(`/api/plans/workout/${planId}/logs`, { date: today, exerciseId: ex.exerciseId, sets })).status).toBe(201);
     // Re-logging the same day replaces, not duplicates.

@@ -1,31 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ts-no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trainer Matching Demo</title>
-  <link rel="stylesheet" href="trainermatch.css">
-  <link rel="stylesheet" href="css/trainsync-ext.css">
-  <link rel="icon" type="image/png" href="webicon1.png">
+  <title>Find your trainer · TrainSync</title>
+  <meta name="description" content="Certified trainers ranked by how well they fit your goals, schedule, coaching style, budget and location, with the reasons shown.">
+  <link rel="icon" type="image/png" href="/webicon1.png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/onboarding.css">
+  <link rel="stylesheet" href="/css/plans.css">
+  <link rel="stylesheet" href="/css/match.css">
 </head>
-<body>
-  <video autoplay muted loop id="bg-video">
-    <source src="backgroundhome.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="title" id="trainsynctitle"><h1>TrainSync</h1></div>
-  <div class="carousel-container">
-    <div class="trainer-profile">
-      <h2 id="trainer-name">Trainer Name</h2>
-      <p id="trainer-specialty">Specialty</p>
-      <p id="trainer-experience">Experience</p>
+<body data-page="trainermatch">
+  <a class="ts-skip" href="#main">Skip to content</a>
+  <div class="ts-bg" aria-hidden="true"><img src="/media/smoke-wide.webp" alt=""></div>
+  <header data-ts-nav></header>
+  <main id="main" class="p-page">
+    <div class="ts-container ts-container--wide">
+      <header class="m-head">
+        <div>
+          <p class="ts-eyebrow" data-m-eyebrow>Trainer match</p>
+          <h1 class="ts-h2" data-m-title>Trainers who fit you</h1>
+          <p class="p-head__sub" data-m-sub>Ranked by goals, schedule, coaching style, personality, budget and distance.</p>
+        </div>
+        <div class="m-tools" data-m-tools hidden>
+          <label class="m-search">
+            <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-search"></use></svg>
+            <span class="ts-sr-only">Search trainers</span>
+            <input type="search" class="ts-input" placeholder="Search name, gym or area" data-m-q>
+          </label>
+          <button class="ts-icon-btn" type="button" aria-pressed="false" aria-label="Show saved trainers only" data-m-saved>
+            <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-bookmark"></use></svg>
+          </button>
+        </div>
+      </header>
+      <div class="m-filters" data-m-filters hidden></div>
+      <div data-m-root><div class="ts-skeleton p-skel"></div></div>
     </div>
-    <div class="buttons">
-      <button id="reject">Reject</button>
-      <button id="match">Match</button>
-    </div>
+  </main>
+
+  <div class="ts-float-pill" data-m-pill aria-live="polite">
+    <span class="ts-float-pill__label" data-m-pill-label></span>
+    <button class="ts-btn ts-btn--gold ts-btn--sm" type="button" data-m-compare>Compare</button>
   </div>
-  <script src="js/common.js"></script>
-  <script src="js/trainermatch.js"></script>
+
+  <dialog class="ts-sheet" data-m-sheet aria-labelledby="m-sheet-title">
+    <div class="ts-sheet__grip" aria-hidden="true"></div>
+    <button class="ts-icon-btn ts-icon-btn--sm ts-sheet__close" type="button" aria-label="Close" data-m-close>
+      <svg class="ts-icon" aria-hidden="true"><use href="/icons.svg#i-close"></use></svg>
+    </button>
+    <div class="ts-sheet__body" data-m-sheet-body></div>
+  </dialog>
+
+  <footer data-ts-footer></footer>
+  <script src="/js/common.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/forms.js"></script>
+  <script src="/js/trainermatch.js"></script>
 </body>
 </html>

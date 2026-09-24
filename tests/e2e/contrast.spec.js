@@ -54,6 +54,8 @@ async function textElements(page) {
   });
 }
 
+test.use({ bypassCSP: true }); // the probe injects a style tag
+
 test.describe('text contrast over the brightest video frame', () => {
   for (const vp of VIEWPORTS) {
     for (const url of PAGES) {
