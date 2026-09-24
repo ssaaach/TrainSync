@@ -6,6 +6,7 @@
     <title>Workout Plans</title>
     <link rel="icon" type="image/png" href="webicon1.png">
     <link rel="stylesheet" href="workoutplans.css">
+    <link rel="stylesheet" href="css/trainsync-ext.css">
 </head>
 <body>
     <video autoplay muted loop id="bg-video">
@@ -17,55 +18,17 @@
         <div class="SearchGym" id="searchBox">
             <h4>Personalised Workout Plan</h4>
             <label for="currentType">Current Body Type</label>
-            <input type="text" id="currentType" name="currentType" placeholder="ectomorph || mesomorph || endomorph" required><br>
+            <input type="text" id="currentType" name="currentType" placeholder="ectomorph || mesomorph || endomorph" required list="bodytype-options" autocomplete="off"><datalist id="bodytype-options"><option value="ectomorph"><option value="mesomorph"><option value="endomorph"></datalist><br>
             <label for="goalType">Goal</label>
-            <input type="text" id="goalType" name="goalType" placeholder="cut || bulk || lean bulk || maintainance"><br><br>
+            <input type="text" id="goalType" name="goalType" placeholder="cut || bulk || lean bulk || maintainance" list="goal-options" autocomplete="off"><datalist id="goal-options"><option value="cut"><option value="bulk"><option value="lean bulk"><option value="maintenance"></datalist><br><br>
             <button type="Search">Search</button>
             <p id="errorMessage" style="color: red;"></p>
             <p>New to TrainSync? <a class="registerpagelink" href="registration.html">Register</a></p>
         </div>
         <div id="dietResults" class="diet-results"></div>
     </form>
-    <script>
-        document.getElementById("WorkoutsearchForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const currentType = document.getElementById("currentType").value.trim().toLowerCase();
-            const goalType = document.getElementById("goalType").value.trim().toLowerCase();
-    
-            if (!currentType || !goalType) return;
-    
-            try {
-                const response = await fetch(`http://localhost:5000/auth/workouts/${currentType}/${goalType}`);
-                const workout = await response.json();
-    
-                const resultDiv = document.getElementById("dietResults");
-                resultDiv.innerHTML = "";
-    
-                if (!workout || Object.keys(workout).length === 0) {
-                    resultDiv.innerHTML = "<p>No matching workout found.</p>";
-                    return;
-                }
-    
-                document.getElementById("searchBox").style.display = "none";
-                document.getElementById("trainsynctitle").style.display = "none";
-    
-                const card = document.createElement("div");
-                card.className = "workout-card";
-                card.innerHTML = `
-                    <h3>${workout.title}</h3>
-                    <p><strong>Description:</strong> ${workout.description}</p>
-                    <p><strong>Monday:</strong><br>${workout.monday.replace(/\\n/g, "<br>")}</p>
-                    <p><strong>Tuesday:</strong><br>${workout.tuesday.replace(/\\n/g, "<br>")}</p>
-                    <p><strong>Wednesday:</strong><br>${workout.wednesday.replace(/\\n/g, "<br>")}</p>
-                    <p><strong>Thursday:</strong><br>${workout.thursday.replace(/\\n/g, "<br>")}</p>
-                    <p><strong>Friday:</strong><br>${workout.friday.replace(/\\n/g, "<br>")}</p>
-                `;
-                resultDiv.appendChild(card);
-            } catch (err) {
-                console.error("Error:", err);
-                document.getElementById("errorMessage").textContent = "Server error. Try again.";
-            }
-        });
-    </script>   
+
+    <script src="js/common.js"></script>
+    <script src="js/workoutplans.js"></script>
 </body>
 </html>

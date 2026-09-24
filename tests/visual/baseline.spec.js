@@ -2,6 +2,7 @@
 // Baselines live in tests/visual/baseline/ and are committed.
 const { test, expect } = require('@playwright/test');
 const { freezeMedia, compareToBaseline, MAX_DIFF_RATIO } = require('./helpers');
+const { loginAs } = require('../setup/users');
 
 const VIEWPORTS = {
   desktop: { width: 1440, height: 900 },
@@ -12,7 +13,8 @@ const VIEWPORTS = {
 // `compare[viewport]` passes compareHeight/masks to the comparator.
 const PAGES = [
   { name: 'homepage', path: '/homepage.html' },
-  { name: 'homepage1', path: '/homepage1.html' },
+  // Logged-in landing: redirects to login when anonymous (Phase 1).
+  { name: 'homepage1', path: '/homepage1.html', setup: page => loginAs(page, 'trainee') },
   { name: 'login', path: '/login.html' },
   { name: 'registration', path: '/registration.html' },
   { name: 'trainermatch', path: '/trainermatch.html' },

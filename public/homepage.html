@@ -6,6 +6,7 @@
   <title>TrainSync</title>
   <link rel="icon" type="image/png" href="webicon1.png">
   <link rel="stylesheet" href="homepage.css">
+  <link rel="stylesheet" href="css/trainsync-ext.css">
 </head>
 <body>
   <video autoplay muted loop id="bg-video">
@@ -74,67 +75,7 @@
       <a href="https://www.linkedin.com/in/sachin-bhat-98397b2a0/" target="_blank"><img src="linkedin logo.png" height="37px" width="37px"></a>
     </div>        
   </footer>
+  <script src="js/common.js"></script>
+  <script src="js/homepage.js"></script>
 </body>
 </html>
-
-<!-- Replace the entire script section at the bottom with this single version -->
-<script>
-    let lastScrollTop = 0;
-    const navbar = document.querySelector(".navbar");
-  
-    window.addEventListener("scroll", function () {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
-        navbar.classList.add("hidden-navbar");
-      } else {
-        navbar.classList.remove("hidden-navbar");
-      }
-      lastScrollTop = scrollTop;
-    });
-  
-    document.addEventListener("DOMContentLoaded", async () => {
-      const navLogin = document.getElementById("nav-login");
-      const sidebar = document.getElementById("sidebar");
-  
-      try {
-        const res = await fetch("http://localhost:5000/auth/session", {
-          credentials: "include"
-        });
-        const data = await res.json();
-  
-        if (data.loggedIn) {
-          navLogin.innerHTML = `<a href="#" id="user-menu-toggle">☰ ${data.email}</a>`;
-  
-          document.getElementById("user-menu-toggle").addEventListener("click", (e) => {
-            e.preventDefault();
-            sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
-          });
-  
-          document.getElementById("logout-btn").addEventListener("click", async (e) => {
-            e.preventDefault();
-            try {
-              const response = await fetch("http://localhost:5000/auth/logout", {
-                method: "POST",
-                credentials: "include"
-              });
-              const result = await response.json();
-              if (response.ok) {
-                window.location.href = "homepage.html"; // Refresh to show logged out state
-              }
-            } catch (err) {
-              console.error("Logout failed:", err);
-            }
-          });
-        }
-      } catch (err) {
-        console.error("Session check failed:", err);
-      }
-  
-      // Close sidebar when clicking outside
-      document.addEventListener("click", (e) => {
-        if (!sidebar.contains(e.target)) {
-          sidebar.style.display = "none";
-        }
-      });
-    });
-</script>

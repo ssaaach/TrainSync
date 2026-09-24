@@ -6,6 +6,7 @@
     <title>Register Now</title>
     <link rel="icon" type="image/png" href="webicon1.png">
     <link rel="stylesheet" href="registration.css">
+    <link rel="stylesheet" href="css/trainsync-ext.css">
 </head>
 <body>
     <div class="title"><h1>TrainSync</h1></div>
@@ -23,7 +24,7 @@
             <input type="text" id="name" name="name" required><br>
             
             <label for="role">Role</label>
-            <input type="text" id="role" name="role" required placeholder="trainer / trainee"><br>
+            <input type="text" id="role" name="role" required placeholder="trainer / trainee" list="role-options" autocomplete="off"><datalist id="role-options"><option value="trainer"><option value="trainee"></datalist><br>
             
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required><br>
@@ -36,39 +37,7 @@
             <p>Already have an account? <a class="loginpagelink" href="login.html">Log In</a></p>
         </div>
     </form>
+    <script src="js/common.js"></script>
+    <script src="js/registration.js"></script>
 </body>
 </html>
-
-<script>
-    document.getElementById("registerForm").addEventListener("submit", async function (event) {
-        event.preventDefault(); // Prevent default form submission
-
-        const email = document.getElementById("email").value;
-        const name = document.getElementById("name").value;
-        const role = document.getElementById("role").value.trim().toLowerCase();
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-
-        try {
-            const response = await fetch("http://localhost:5000/auth/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, name, role, password, confirmPassword }),
-                credentials: "include"  // 🔥 Required for cookies & sessions
-            });
-
-            const data = await response.json();
-            console.log("✅ Registration Response:", data);
-
-            if (response.ok) {
-                window.location.href = "login.html"; // Redirect on success
-            } else {
-                document.getElementById("errorMessage").innerText = data.error;
-            }
-        } catch (error) {
-            console.error("❌ Registration Error:", error);
-            document.getElementById("errorMessage").innerText = "Something went wrong. Try again.";
-        }
-    });
-</script>
-

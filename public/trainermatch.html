@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trainer Matching Demo</title>
   <link rel="stylesheet" href="trainermatch.css">
+  <link rel="stylesheet" href="css/trainsync-ext.css">
   <link rel="icon" type="image/png" href="webicon1.png">
 </head>
 <body>
@@ -20,44 +21,11 @@
       <p id="trainer-experience">Experience</p>
     </div>
     <div class="buttons">
-      <button id="reject" onclick="nextTrainer()">Reject</button>
-      <button id="match" onclick="matchTrainer()">Match</button>
+      <button id="reject">Reject</button>
+      <button id="match">Match</button>
     </div>
   </div>
+  <script src="js/common.js"></script>
+  <script src="js/trainermatch.js"></script>
 </body>
 </html>
-<script>
-        const trainers = [
-    { name: 'Trainer 1', specialty: 'Yoga', experience: '5 years' },
-    { name: 'Trainer 2', specialty: 'Weightlifting', experience: '3 years' },
-    { name: 'Trainer 3', specialty: 'Cardio', experience: '7 years' },
-    // Add more trainer profiles as needed
-    ];
-
-    let currentTrainerIndex = 0;
-
-    function displayTrainer(index) {
-    const trainer = trainers[index];
-    document.getElementById('trainer-name').textContent = trainer.name;
-    document.getElementById('trainer-specialty').textContent = `Specialty: ${trainer.specialty}`;
-    document.getElementById('trainer-experience').textContent = `Experience: ${trainer.experience}`;
-    }
-
-    function nextTrainer() {
-    currentTrainerIndex++;
-    if (currentTrainerIndex >= trainers.length) {
-        alert('No more trainers to show!');
-    } else {
-        displayTrainer(currentTrainerIndex);
-    }
-    }
-
-    function matchTrainer() {
-    const trainer = trainers[currentTrainerIndex];
-    alert(`You have matched with ${trainer.name}!`);
-    nextTrainer();
-    }
-
-    displayTrainer(currentTrainerIndex);
-
-</script>

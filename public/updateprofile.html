@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="icon" type="image/png" href="webicon1.png">
+    <link rel="stylesheet" href="registration.css">
+    <link rel="stylesheet" href="css/trainsync-ext.css">
+</head>
+<body>
+    <div class="title"><h1>TrainSync</h1></div>
+    <video autoplay muted loop id="bg-video">
+        <source src="backgroundhome.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <form id="profileForm">
+        <div class="Registration">
+            <h4>Update Profile</h4>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <div data-role="trainee" hidden>
+                <label for="age">Age</label>
+                <input type="text" id="age" name="age" inputmode="numeric"><br>
+
+                <label for="gender">Gender</label>
+                <input type="text" id="gender" name="gender" placeholder="male / female / other" list="gender-options" autocomplete="off"><datalist id="gender-options"><option value="male"><option value="female"><option value="other"></datalist><br>
+
+                <label for="fitness_goal">Fitness Goal</label>
+                <input type="text" id="fitness_goal" name="fitness_goal" placeholder="e.g. lose 5 kg, build strength"><br>
+            </div>
+
+            <div data-role="trainer" hidden>
+                <label for="experience">Experience (years)</label>
+                <input type="text" id="experience" name="experience" inputmode="numeric"><br>
+
+                <label for="certification">Certification</label>
+                <input type="text" id="certification" name="certification"><br>
+
+                <label for="specialization">Specialization</label>
+                <input type="text" id="specialization" name="specialization" placeholder="e.g. strength, yoga, fat loss"><br>
+            </div>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Indiranagar, Bengaluru"><br><br>
+
+            <button type="submit">Save Changes</button>
+            <p id="errorMessage" style="color: rgb(211, 196, 196);"></p>
+            <p>Back to <a class="loginpagelink" href="homepage1.html">Home</a></p>
+        </div>
+    </form>
+    <script src="js/common.js"></script>
+    <script src="js/updateprofile.js"></script>
+</body>
+</html>

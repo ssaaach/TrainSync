@@ -6,6 +6,7 @@
   <title>TrainSync - Dashboard</title>
   <link rel="icon" type="image/png" href="webicon1.png">
   <link rel="stylesheet" href="homepage.css">
+  <link rel="stylesheet" href="css/trainsync-ext.css">
 </head>
 <body>
   <video autoplay muted loop id="bg-video">
@@ -75,39 +76,8 @@
     </div>        
   </footer>    
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Assume user is already logged in and the username is available
 
-      // Set the username on the page and in the sidebar
-      const userNameElement = document.getElementById("user-name");
-      if (userNameElement) {
-        userNameElement.innerText = `Hello, ${username}`;
-      }
-      document.getElementById("greeting").innerText = `${username}`;
-
-      // Handle Logout
-      document.getElementById("logout-btn").onclick = async () => {
-        try {
-          const response = await fetch("http://localhost:5000/auth/logout", {
-            method: "POST",
-            credentials: "include",
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
-            alert(result.message); // Should show "Logged out successfully" or similar
-            window.location.href = "homepage.html";
-          } else {
-            alert(result.error || "Logout failed.");
-          }
-        } catch (error) {
-          console.error("Logout error:", error);
-          alert("An error occurred while logging out.");
-        }
-      };
-    });
-  </script>
+  <script src="js/common.js"></script>
+  <script src="js/homepage1.js"></script>
 </body>
 </html>
