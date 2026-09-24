@@ -100,6 +100,7 @@ app.use('/api/diets', dietRoutes);
 app.use('/api/gyms', gymRoutes);
 app.use('/api/stats', require('./routes/stats'));
 app.use('/api/plans/workout', require('./routes/workoutPlans'));
+app.use('/api/plans/diet', require('./routes/dietPlans'));
 app.use('/api/localities', require('./routes/localities'));
 app.use('/api/onboarding', require('./routes/onboarding'));
 app.use('/api/me', require('./routes/me'));

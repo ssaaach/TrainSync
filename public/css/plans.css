@@ -102,3 +102,17 @@
   body { background: #fff; color: #000; }
   .ts-glass { background: #fff !important; box-shadow: none !important; border: 1px solid #ccc !important; }
 }
+
+/* diet */
+.d-ring { position: relative; width: 170px; margin: var(--s-2) auto var(--s-3); }
+.d-ring svg { width: 100%; height: auto; }
+.d-ring__label { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.d-ring__label strong { font-size: var(--fs-2xl); font-weight: var(--fw-semibold); line-height: 1; }
+.d-ring__label span { font-size: var(--fs-xs); color: var(--c-text-muted); }
+.d-legend { display: flex; justify-content: center; gap: var(--s-4); margin-bottom: var(--s-4); font-size: var(--fs-xs); color: var(--c-text-soft); }
+.d-dot::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.d-dot--p::before { background: #ffcc00; } .d-dot--c::before { background: #d5ada6; } .d-dot--f::before { background: #8f8a86; }
+.d-meal__row { grid-template-columns: auto minmax(0, 1fr) auto; }
+.d-groceries { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 360px; overflow-y: auto; font-size: var(--fs-sm); }
+.d-groceries li { display: flex; justify-content: space-between; gap: var(--s-3); padding: 6px var(--s-2); border-bottom: 1px solid var(--c-line); color: var(--c-text-soft); }
+.d-groceries li span:last-child { color: var(--c-text-muted); white-space: nowrap; }

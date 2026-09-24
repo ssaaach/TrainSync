@@ -27,5 +27,18 @@ module.exports = async function globalSetup() {
         'free-exercise-db', 0])]
     );
   }
+  const [[{ nd }]] = await conn.query('SELECT COUNT(*) AS nd FROM dishes');
+  if (nd === 0) {
+    const nut = require('../fixtures/nutrition.json');
+    const ins = async (table, rows) => {
+      if (!rows.length) return;
+      const cols = Object.keys(rows[0]);
+      const val = v => (v !== null && typeof v === 'object' && !(v instanceof Date) ? JSON.stringify(v) : v);
+      await conn.query(`INSERT INTO ${table} (${cols.join(', ')}) VALUES ?`, [rows.map(r => cols.map(c => val(r[c])))]);
+    };
+    await ins('foods', nut.foods);
+    await ins('dishes', nut.dishes);
+    await ins('dish_ingredients', nut.dish_ingredients);
+  }
   await conn.end();
 };
